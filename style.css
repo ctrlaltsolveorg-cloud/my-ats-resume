@@ -648,32 +648,32 @@ textarea {
    ========================================================================== */
 
 .template-timeline .timeline-header {
-  padding-bottom: 8px;
+  padding-bottom: 6px;
   border-bottom: 2.5px solid #2b3e50; /* Full horizontal divider under header */
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .template-timeline .timeline-header h1 {
-  font-size: 24pt;
+  font-size: 21pt;
   font-weight: 800;
   color: #2b3e50;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  line-height: 1.1;
-  margin-bottom: 4px;
+  line-height: 1.05;
+  margin-bottom: 3px;
 }
 
 .template-timeline .timeline-headline {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
   font-weight: 600;
   color: #576574;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
 }
 
 .template-timeline .timeline-layout {
   display: flex;
-  gap: 22px;
+  gap: 18px;
 }
 
 /* Left Sidebar (~30%) */
@@ -681,32 +681,32 @@ textarea {
   width: 32%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .template-timeline .sidebar-section-title {
-  font-size: 10pt;
+  font-size: 9.5pt;
   font-weight: 800;
   color: #2b3e50;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding-bottom: 3px;
+  padding-bottom: 2px;
   border-bottom: 1.5px solid #2b3e50;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .template-timeline .contact-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 8.25pt;
+  gap: 5px;
+  font-size: 7.8pt;
   color: #2d3436;
 }
 
 .template-timeline .contact-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   word-break: break-word;
 }
 
@@ -722,20 +722,20 @@ textarea {
 }
 
 .template-timeline .sidebar-skill-group {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .template-timeline .sidebar-skill-group h4 {
-  font-size: 8.5pt;
+  font-size: 8pt;
   font-weight: 700;
   color: #2b3e50;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .template-timeline .sidebar-skill-group p {
-  font-size: 8pt;
+  font-size: 7.6pt;
   color: #334155;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 /* Right Main Column (~68%) with Vertical Timeline Line */
@@ -743,11 +743,11 @@ textarea {
   flex: 1;
   position: relative;
   border-left: 2px solid #cbd5e1; /* Timeline vertical line */
-  padding-left: 22px;
-  margin-left: 14px;
+  padding-left: 18px;
+  margin-left: 10px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 /* Timeline Section Header with Node Icon */
@@ -757,10 +757,10 @@ textarea {
 
 .template-timeline .timeline-icon-badge {
   position: absolute;
-  left: -35px;
+  left: -30px;
   top: -2px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   background-color: #2b3e50;
   color: #ffffff;
   border-radius: 50%;
@@ -772,37 +772,37 @@ textarea {
 }
 
 .template-timeline .main-section-title {
-  font-size: 10.5pt;
+  font-size: 9.5pt;
   font-weight: 800;
   color: #2b3e50;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding-bottom: 3px;
+  padding-bottom: 2px;
   border-bottom: 1.5px solid #cbd5e1;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .template-timeline .timeline-summary {
-  font-size: 8.5pt;
+  font-size: 8pt;
   color: #2d3436;
   font-style: italic;
-  line-height: 1.35;
+  line-height: 1.3;
   text-align: justify;
 }
 
 /* Timeline Entry Items */
 .template-timeline .timeline-entry {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .template-timeline .timeline-entry::before {
   content: '';
   position: absolute;
-  left: -26px;
-  top: 6px;
-  width: 7px;
-  height: 7px;
+  left: -22px;
+  top: 5px;
+  width: 6px;
+  height: 6px;
   background-color: #ffffff;
   border: 2px solid #2b3e50;
   border-radius: 50%;
@@ -816,42 +816,42 @@ textarea {
 }
 
 .template-timeline .timeline-title {
-  font-size: 9.25pt;
+  font-size: 8.8pt;
   font-weight: 700;
   color: #2b3e50;
 }
 
 .template-timeline .timeline-date {
-  font-size: 8pt;
+  font-size: 7.5pt;
   font-weight: 600;
   color: #636e72;
   text-transform: uppercase;
 }
 
 .template-timeline .timeline-sub {
-  font-size: 8.25pt;
+  font-size: 7.8pt;
   font-weight: 600;
   color: #485460;
 }
 
 .template-timeline .timeline-tech {
-  font-size: 7.8pt;
+  font-size: 7.5pt;
   font-weight: 600;
   color: #0984e3;
   margin-top: 1px;
 }
 
 .template-timeline .timeline-bullets {
-  margin-top: 3px;
-  padding-left: 14px;
+  margin-top: 2px;
+  padding-left: 12px;
   list-style-type: disc;
 }
 
 .template-timeline .timeline-bullets li {
-  font-size: 8.25pt;
+  font-size: 7.8pt;
   color: #2d3436;
-  margin-bottom: 2px;
-  line-height: 1.32;
+  margin-bottom: 1.5px;
+  line-height: 1.28;
 }
 
 .template-timeline .timeline-bullets li::marker {
