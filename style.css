@@ -1,0 +1,735 @@
+/* ==========================================================================
+   ATS RESUME STUDIO - CORE & PRINT CSS
+   ========================================================================== */
+
+:root {
+  /* Web App UI Theme Tokens (Dark Mode) */
+  --bg-dark: #090d16;
+  --panel-bg: #111827;
+  --card-bg: #1f293d;
+  --border-color: #374151;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --input-bg: #111827;
+  
+  /* Resume Printing & Preview Tokens (A4 Dimensions) */
+  --page-width: 210mm;
+  --page-height: 297mm;
+  
+  /* Density Profiles */
+  --res-font-name: 20pt;
+  --res-font-title: 10pt;
+  --res-font-heading: 10.5pt;
+  --res-font-subheading: 9.5pt;
+  --res-font-body: 9pt;
+  --res-font-meta: 8.5pt;
+  
+  --res-section-margin: 9px;
+  --res-item-margin: 7px;
+  --res-bullet-margin: 2.5px;
+  --res-line-height: 1.38;
+}
+
+/* Compact Density override */
+.density-compact {
+  --res-font-name: 19.5pt;
+  --res-font-title: 9.5pt;
+  --res-font-heading: 10pt;
+  --res-font-subheading: 9.25pt;
+  --res-font-body: 8.75pt;
+  --res-font-meta: 8.25pt;
+  
+  --res-section-margin: 7px;
+  --res-item-margin: 5.5px;
+  --res-bullet-margin: 2px;
+  --res-line-height: 1.32;
+}
+
+/* Tight Density override */
+.density-tight {
+  --res-font-name: 18.5pt;
+  --res-font-title: 9pt;
+  --res-font-heading: 9.5pt;
+  --res-font-subheading: 8.75pt;
+  --res-font-body: 8.25pt;
+  --res-font-meta: 8pt;
+  
+  --res-section-margin: 5px;
+  --res-item-margin: 4px;
+  --res-bullet-margin: 1.5px;
+  --res-line-height: 1.25;
+}
+
+/* Reset & Base UI */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Application Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Top App Navigation Header */
+.app-header {
+  height: 56px;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 20;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.brand-text h1 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.badge-tag {
+  font-size: 0.7rem;
+  background-color: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.density-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.density-control select {
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+  background-color: #2b384e;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent-primary);
+  border: 1px dashed var(--accent-primary);
+  width: 100%;
+  justify-content: center;
+  padding: 8px;
+  margin-top: 10px;
+}
+.btn-outline:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.btn-small {
+  font-size: 0.78rem;
+  padding: 4px 8px;
+}
+
+.btn-danger {
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* Workspace Split Area */
+.workspace {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+/* Left Editor Panel */
+.editor-panel {
+  width: 480px;
+  min-width: 360px;
+  max-width: 540px;
+  background-color: var(--panel-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-header {
+  padding: 14px 18px 10px 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.editor-header h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.editor-header p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Tabs Header */
+.editor-tabs {
+  display: flex;
+  overflow-x: auto;
+  background-color: #0b1120;
+  border-bottom: 1px solid var(--border-color);
+  scrollbar-width: thin;
+}
+
+.tab-btn {
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+}
+
+.tab-btn.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+/* Form Container */
+.tab-content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+textarea,
+select {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: #ffffff;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.field-hint {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Dynamic Array Cards in Editor */
+.editor-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.card-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Bullet Point List Editor */
+.bullets-editor {
+  margin-top: 8px;
+}
+
+.bullet-item {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+
+.bullet-item textarea {
+  font-size: 0.78rem;
+}
+
+/* Right Preview Panel */
+.preview-panel {
+  flex: 1;
+  background-color: #0b0f19;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.preview-toolbar {
+  height: 42px;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.preview-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-success);
+}
+
+.badge-fit {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.badge-fit-success {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-fit-warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  width: 24px;
+  height: 24px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* Viewport for centering A4 Page */
+.preview-viewport {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: radial-gradient(circle at center, #151d2a 0%, #080c14 100%);
+}
+
+/* ==========================================================================
+   RESUME A4 PAPER CANVAS (Target for PDF / Print Output)
+   ========================================================================== */
+
+.resume-paper {
+  width: var(--page-width);
+  min-height: var(--page-height);
+  background-color: #ffffff;
+  color: #0f172a; /* Sharp dark navy text for high contrast */
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  padding: 10mm 12mm;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  transform-origin: top center;
+  transition: transform 0.1s ease;
+  line-height: var(--res-line-height);
+}
+
+/* Resume Document Header */
+.resume-header {
+  text-align: center;
+  margin-bottom: var(--res-section-margin);
+}
+
+.resume-header h1 {
+  font-size: var(--res-font-name);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.resume-headline {
+  font-size: var(--res-font-title);
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 4px;
+}
+
+.resume-contact-bar {
+  font-size: var(--res-font-meta);
+  color: #475569;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.resume-contact-bar a {
+  color: #0f172a;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.contact-sep {
+  color: #94a3b8;
+}
+
+/* Resume Sections */
+.resume-section {
+  margin-bottom: var(--res-section-margin);
+}
+
+.section-title {
+  font-size: var(--res-font-heading);
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.section-divider {
+  height: 1px;
+  background-color: #000000;
+  margin-bottom: 5px;
+}
+
+/* Professional Summary Paragraph */
+.summary-text {
+  font-size: var(--res-font-body);
+  color: #1e293b;
+  text-align: justify;
+}
+
+/* Entries List (Education, Projects, Leadership) */
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--res-item-margin);
+}
+
+.entry-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entry-title {
+  font-size: var(--res-font-subheading);
+  font-weight: 700;
+  color: #000000;
+}
+
+.entry-subtitle {
+  font-size: var(--res-font-body);
+  font-weight: 600;
+  color: #334155;
+}
+
+.entry-location,
+.entry-date {
+  font-size: var(--res-font-meta);
+  font-weight: 500;
+  color: #475569;
+  white-space: nowrap;
+}
+
+.entry-tech {
+  font-size: var(--res-font-meta);
+  font-weight: 500;
+  color: #475569;
+  font-style: italic;
+  margin-top: 1px;
+}
+
+/* Bullet Points */
+.entry-bullets {
+  margin-top: 2px;
+  padding-left: 14px;
+  list-style-type: disc;
+}
+
+.entry-bullets li {
+  font-size: var(--res-font-body);
+  color: #1e293b;
+  margin-bottom: var(--res-bullet-margin);
+  padding-left: 2px;
+}
+
+/* Technical Skills Grid */
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.skill-line {
+  font-size: var(--res-font-body);
+  color: #1e293b;
+}
+
+.skill-category {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+  }
+  .workspace {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+  .editor-panel {
+    width: 100%;
+    max-width: 100%;
+    height: 500px;
+  }
+  .preview-panel {
+    height: 800px;
+  }
+}
+
+/* ==========================================================================
+   PRINT / PDF EXPORT ENGINE (@media print)
+   STRICT 1-PAGE A4 OUTPUT RULES
+   ========================================================================== */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm; /* Clean minimal margins */
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide all Web UI components */
+  .no-print,
+  .app-header,
+  .editor-panel,
+  .preview-toolbar {
+    display: none !important;
+  }
+
+  .app-container,
+  .workspace,
+  .preview-panel,
+  .preview-viewport {
+    display: block !important;
+    position: static !important;
+    overflow: visible !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Resume Document formatting for printer */
+  .resume-paper {
+    width: 100% !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  /* Ensure text remains sharp and links active */
+  a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+}

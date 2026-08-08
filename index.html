@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATS Resume Builder | Piyush Kumar</title>
+  <meta name="description" content="Single-page ATS-Friendly Resume Builder for Software & Product Development Internships">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <!-- Top Web Application Header (Hidden in Print) -->
+    <header class="app-header no-print">
+      <div class="header-brand">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>ATS Resume Studio</h1>
+          <span class="badge-tag">1-Page A4 ATS Compliant</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="density-control" title="Adjust document spacing density to fit text on 1 A4 page">
+          <label for="spacing-select">Density:</label>
+          <select id="spacing-select" onchange="updateSpacing(this.value)">
+            <option value="normal">Standard (Default)</option>
+            <option value="compact" selected>Compact (Recommended 1-Page)</option>
+            <option value="tight">Ultra Tight</option>
+          </select>
+        </div>
+
+        <button class="btn btn-secondary" onclick="resetToDefault()" title="Reset to original verified resume data">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          Reset Default
+        </button>
+
+        <button class="btn btn-primary" onclick="triggerPrint()" title="Export clean 1-Page PDF or print resume">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PDF / Print
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Split Panel -->
+    <main class="workspace">
+      <!-- Left Controls Panel (Hidden in Print) -->
+      <aside class="editor-panel no-print" id="editor-panel">
+        <div class="editor-header">
+          <h2>Resume Content Editor</h2>
+          <p>Edits update the A4 preview instantly. Data saves automatically.</p>
+        </div>
+
+        <!-- Section Navigation Tabs -->
+        <nav class="editor-tabs">
+          <button class="tab-btn active" onclick="switchTab('header-tab')">Header</button>
+          <button class="tab-btn" onclick="switchTab('summary-tab')">Summary</button>
+          <button class="tab-btn" onclick="switchTab('education-tab')">Education</button>
+          <button class="tab-btn" onclick="switchTab('skills-tab')">Skills</button>
+          <button class="tab-btn" onclick="switchTab('projects-tab')">Projects</button>
+          <button class="tab-btn" onclick="switchTab('cert-tab')">Cert / Hackathon</button>
+          <button class="tab-btn" onclick="switchTab('leadership-tab')">Leadership</button>
+        </nav>
+
+        <!-- Editor Tab Contents -->
+        <div class="tab-content-wrapper">
+          
+          <!-- TAB 1: Header & Personal Info -->
+          <div id="header-tab" class="tab-pane active">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="input-fullName" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Headline Positioning</label>
+              <input type="text" id="input-headline" oninput="handleInputChange()">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Location</label>
+                <input type="text" id="input-location" oninput="handleInputChange()">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" id="input-phone" oninput="handleInputChange()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="input-email" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>LinkedIn Profile URL</label>
+              <input type="url" id="input-linkedin" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>GitHub Profile URL</label>
+              <input type="url" id="input-github" oninput="handleInputChange()">
+            </div>
+          </div>
+
+          <!-- TAB 2: Professional Summary -->
+          <div id="summary-tab" class="tab-pane">
+            <div class="form-group">
+              <label>Summary Statement (Aim for 2-3 concise lines in PDF)</label>
+              <textarea id="input-summary" rows="5" oninput="handleInputChange()"></textarea>
+              <span class="field-hint">Keep text natural, evidence-focused, and tailored for software & product development internships.</span>
+            </div>
+          </div>
+
+          <!-- TAB 3: Education -->
+          <div id="education-tab" class="tab-pane">
+            <div id="education-items-container"></div>
+            <button class="btn btn-small btn-outline" onclick="addEducationItem()">+ Add Education Entry</button>
+          </div>
+
+          <!-- TAB 4: Technical Skills -->
+          <div id="skills-tab" class="tab-pane">
+            <p class="field-hint mb-3">Listed as standard text groups (ATS best practice). No progress bars or ratings.</p>
+            <div class="form-group">
+              <label>Programming Languages</label>
+              <input type="text" id="input-skills-languages" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Frontend Development</label>
+              <input type="text" id="input-skills-frontend" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Backend Development</label>
+              <input type="text" id="input-skills-backend" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Databases / Backend Services</label>
+              <input type="text" id="input-skills-databases" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Mobile Development</label>
+              <input type="text" id="input-skills-mobile" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Desktop & Computer Vision</label>
+              <input type="text" id="input-skills-desktop" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>UI/UX Design Tools</label>
+              <input type="text" id="input-skills-design" oninput="handleInputChange()">
+            </div>
+            <div class="form-group">
+              <label>Developer Tools</label>
+              <input type="text" id="input-skills-tools" oninput="handleInputChange()">
+            </div>
+          </div>
+
+          <!-- TAB 5: Projects -->
+          <div id="projects-tab" class="tab-pane">
+            <div id="projects-items-container"></div>
+            <button class="btn btn-small btn-outline" onclick="addProjectItem()">+ Add Project Entry</button>
+          </div>
+
+          <!-- TAB 6: Certification / Hackathons -->
+          <div id="cert-tab" class="tab-pane">
+            <div id="cert-items-container"></div>
+            <button class="btn btn-small btn-outline" onclick="addCertItem()">+ Add Certification / Hackathon Entry</button>
+          </div>
+
+          <!-- TAB 7: Leadership -->
+          <div id="leadership-tab" class="tab-pane">
+            <div id="leadership-items-container"></div>
+            <button class="btn btn-small btn-outline" onclick="addLeadershipItem()">+ Add Leadership Entry</button>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Right Live Preview Panel -->
+      <section class="preview-panel">
+        <div class="preview-toolbar no-print">
+          <div class="preview-status">
+            <span class="status-indicator"></span>
+            <span>Live A4 Preview</span>
+            <span id="page-fit-badge" class="badge-fit badge-fit-success">✓ 1-Page A4 Fit</span>
+          </div>
+          <div class="preview-actions">
+            <button class="icon-btn" onclick="toggleZoom(-0.05)" title="Zoom Out">-</button>
+            <span id="zoom-level">100%</span>
+            <button class="icon-btn" onclick="toggleZoom(0.05)" title="Zoom In">+</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Canvas Wrapper -->
+        <div class="preview-viewport" id="preview-viewport">
+          <!-- The Printable A4 Resume Document -->
+          <div id="resume-paper" class="resume-paper density-compact">
+            
+            <!-- HEADER SECTION -->
+            <header class="resume-header">
+              <h1 id="preview-fullName">PIYUSH KUMAR</h1>
+              <p class="resume-headline" id="preview-headline">Full Stack Developer | Product Builder | Mechatronics & Data Science Student</p>
+              <div class="resume-contact-bar" id="preview-contactBar">
+                <!-- Generated Contact Elements -->
+              </div>
+            </header>
+
+            <!-- PROFESSIONAL SUMMARY -->
+            <section class="resume-section" id="sec-summary">
+              <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+              <div class="section-divider"></div>
+              <p class="summary-text" id="preview-summary"></p>
+            </section>
+
+            <!-- EDUCATION -->
+            <section class="resume-section" id="sec-education">
+              <h2 class="section-title">EDUCATION</h2>
+              <div class="section-divider"></div>
+              <div id="preview-education-list" class="entries-list"></div>
+            </section>
+
+            <!-- TECHNICAL SKILLS -->
+            <section class="resume-section" id="sec-skills">
+              <h2 class="section-title">TECHNICAL SKILLS</h2>
+              <div class="section-divider"></div>
+              <div class="skills-grid" id="preview-skills-grid"></div>
+            </section>
+
+            <!-- PROJECTS -->
+            <section class="resume-section" id="sec-projects">
+              <h2 class="section-title">PROJECTS</h2>
+              <div class="section-divider"></div>
+              <div id="preview-projects-list" class="entries-list"></div>
+            </section>
+
+            <!-- CERTIFICATION / HACKATHON -->
+            <section class="resume-section" id="sec-certification">
+              <h2 class="section-title">CERTIFICATION & HACKATHONS</h2>
+              <div class="section-divider"></div>
+              <div id="preview-cert-list" class="entries-list"></div>
+            </section>
+
+            <!-- LEADERSHIP -->
+            <section class="resume-section" id="sec-leadership">
+              <h2 class="section-title">LEADERSHIP</h2>
+              <div class="section-divider"></div>
+              <div id="preview-leadership-list" class="entries-list"></div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
