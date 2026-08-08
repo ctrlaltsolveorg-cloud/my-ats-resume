@@ -21,44 +21,44 @@
   --page-height: 297mm;
   
   /* Density Profiles */
-  --res-font-name: 20pt;
-  --res-font-title: 10pt;
+  --res-font-name: 22pt;
+  --res-font-title: 10.5pt;
   --res-font-heading: 10.5pt;
   --res-font-subheading: 9.5pt;
   --res-font-body: 9pt;
   --res-font-meta: 8.5pt;
   
-  --res-section-margin: 9px;
-  --res-item-margin: 7px;
+  --res-section-margin: 12px;
+  --res-item-margin: 8px;
   --res-bullet-margin: 2.5px;
   --res-line-height: 1.38;
 }
 
 /* Compact Density override */
 .density-compact {
-  --res-font-name: 19.5pt;
+  --res-font-name: 20pt;
   --res-font-title: 9.5pt;
-  --res-font-heading: 10pt;
-  --res-font-subheading: 9.25pt;
-  --res-font-body: 8.75pt;
-  --res-font-meta: 8.25pt;
+  --res-font-heading: 9.5pt;
+  --res-font-subheading: 9pt;
+  --res-font-body: 8.5pt;
+  --res-font-meta: 8pt;
   
-  --res-section-margin: 7px;
-  --res-item-margin: 5.5px;
+  --res-section-margin: 8px;
+  --res-item-margin: 6px;
   --res-bullet-margin: 2px;
   --res-line-height: 1.32;
 }
 
 /* Tight Density override */
 .density-tight {
-  --res-font-name: 18.5pt;
+  --res-font-name: 18pt;
   --res-font-title: 9pt;
-  --res-font-heading: 9.5pt;
-  --res-font-subheading: 8.75pt;
-  --res-font-body: 8.25pt;
-  --res-font-meta: 8pt;
+  --res-font-heading: 9pt;
+  --res-font-subheading: 8.5pt;
+  --res-font-body: 8pt;
+  --res-font-meta: 7.5pt;
   
-  --res-section-margin: 5px;
+  --res-section-margin: 6px;
   --res-item-margin: 4px;
   --res-bullet-margin: 1.5px;
   --res-line-height: 1.25;
@@ -486,14 +486,14 @@ textarea {
 }
 
 /* ==========================================================================
-   RESUME A4 PAPER CANVAS (Target for PDF / Print Output)
+   RESUME A4 PAPER CANVAS BASE
    ========================================================================== */
 
 .resume-paper {
   width: var(--page-width);
   min-height: var(--page-height);
   background-color: #ffffff;
-  color: #0f172a; /* Sharp dark navy text for high contrast */
+  color: #1e293b;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
   padding: 10mm 12mm;
   box-sizing: border-box;
@@ -503,29 +503,32 @@ textarea {
   line-height: var(--res-line-height);
 }
 
-/* Resume Document Header */
-.resume-header {
+/* ==========================================================================
+   TEMPLATE 1: CLASSIC SINGLE-COLUMN ATS DESIGN
+   ========================================================================== */
+
+.template-classic .resume-header {
   text-align: center;
   margin-bottom: var(--res-section-margin);
 }
 
-.resume-header h1 {
+.template-classic .resume-header h1 {
   font-size: var(--res-font-name);
   font-weight: 800;
   letter-spacing: 0.04em;
-  color: #0f172a; /* Deep Slate Navy */
+  color: #0f172a;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
 
-.resume-headline {
+.template-classic .resume-headline {
   font-size: var(--res-font-title);
   font-weight: 600;
-  color: #1e40af; /* Rich Indigo Accent */
+  color: #1e40af;
   margin-bottom: 4px;
 }
 
-.resume-contact-bar {
+.template-classic .resume-contact-bar {
   font-size: var(--res-font-meta);
   color: #475569;
   display: flex;
@@ -535,133 +538,327 @@ textarea {
   gap: 4px 6px;
 }
 
-.resume-contact-bar a {
-  color: #1d4ed8; /* Vibrant Royal Blue Link */
+.template-classic .resume-contact-bar a {
+  color: #1d4ed8;
   text-decoration: underline;
   text-decoration-color: rgba(29, 78, 216, 0.4);
   text-underline-offset: 2px;
   font-weight: 500;
 }
 
-.resume-contact-bar a:hover {
-  color: #1e40af;
-  text-decoration-color: #1e40af;
-}
-
-.contact-sep {
-  color: #94a3b8;
-}
-
-/* Resume Sections */
-.resume-section {
+.template-classic .resume-section {
   margin-bottom: var(--res-section-margin);
 }
 
-.section-title {
+.template-classic .section-title {
   font-size: var(--res-font-heading);
   font-weight: 700;
-  color: #0f2942; /* Deep Navy Section Header */
+  color: #0f2942;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
 
-.section-divider {
+.template-classic .section-divider {
   height: 2px;
-  background: linear-gradient(to right, #1d4ed8 0%, #3b82f6 35%, #cbd5e1 100%); /* Elegant Gradient Accent Divider */
+  background: linear-gradient(to right, #1d4ed8 0%, #3b82f6 35%, #cbd5e1 100%);
   margin-bottom: 6px;
   border-radius: 1px;
 }
 
-/* Professional Summary Paragraph */
-.summary-text {
+.template-classic .summary-text {
   font-size: var(--res-font-body);
   color: #1e293b;
   text-align: justify;
 }
 
-/* Entries List (Education, Projects, Leadership) */
-.entries-list {
+.template-classic .entries-list {
   display: flex;
   flex-direction: column;
   gap: var(--res-item-margin);
 }
 
-.entry-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.entry-head {
+.template-classic .entry-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
 
-.entry-title {
+.template-classic .entry-title {
   font-size: var(--res-font-subheading);
   font-weight: 700;
-  color: #0f172a; /* Deep Charcoal Title */
+  color: #0f172a;
 }
 
-.entry-subtitle {
+.template-classic .entry-subtitle {
   font-size: var(--res-font-body);
   font-weight: 600;
   color: #334155;
 }
 
-.entry-location,
-.entry-date {
+.template-classic .entry-location,
+.template-classic .entry-date {
   font-size: var(--res-font-meta);
   font-weight: 600;
   color: #475569;
   white-space: nowrap;
 }
 
-.entry-tech {
+.template-classic .entry-tech {
   font-size: var(--res-font-meta);
   font-weight: 600;
-  color: #0369a1; /* Ocean Blue Tech Stack Accent */
+  color: #0369a1;
   margin-top: 1px;
 }
 
-/* Bullet Points */
-.entry-bullets {
+.template-classic .entry-bullets {
   margin-top: 2px;
   padding-left: 14px;
   list-style-type: disc;
 }
 
-.entry-bullets li {
+.template-classic .entry-bullets li {
   font-size: var(--res-font-body);
   color: #1e293b;
   margin-bottom: var(--res-bullet-margin);
-  padding-left: 2px;
 }
 
-.entry-bullets li::marker {
-  color: #2563eb; /* Blue Bullet Accent */
+.template-classic .entry-bullets li::marker {
+  color: #2563eb;
 }
 
-/* Technical Skills Grid */
-.skills-grid {
+.template-classic .skills-grid {
   display: flex;
   flex-direction: column;
   gap: 3.5px;
 }
 
-.skill-line {
+.template-classic .skill-line {
   font-size: var(--res-font-body);
   color: #1e293b;
 }
 
-.skill-category {
+.template-classic .skill-category {
   font-weight: 700;
-  color: #0f2942; /* Deep Navy Skill Category */
-}
+  color: #0f2942;
 }
 
-/* Responsive adjustments for smaller screens */
+/* ==========================================================================
+   TEMPLATE 2: MODERN EXECUTIVE TIMELINE (MATCHING ATTACHED IMAGE)
+   ========================================================================== */
+
+.template-timeline .timeline-header {
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid #2b3e50; /* Full horizontal divider under header */
+  margin-bottom: 14px;
+}
+
+.template-timeline .timeline-header h1 {
+  font-size: 24pt;
+  font-weight: 800;
+  color: #2b3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.template-timeline .timeline-headline {
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: #576574;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.template-timeline .timeline-layout {
+  display: flex;
+  gap: 22px;
+}
+
+/* Left Sidebar (~30%) */
+.template-timeline .timeline-sidebar {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.template-timeline .sidebar-section-title {
+  font-size: 10pt;
+  font-weight: 800;
+  color: #2b3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid #2b3e50;
+  margin-bottom: 8px;
+}
+
+.template-timeline .contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 8.25pt;
+  color: #2d3436;
+}
+
+.template-timeline .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  word-break: break-word;
+}
+
+.template-timeline .contact-item svg {
+  flex-shrink: 0;
+  color: #2b3e50;
+}
+
+.template-timeline .contact-item a {
+  color: #2b3e50;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.template-timeline .sidebar-skill-group {
+  margin-bottom: 8px;
+}
+
+.template-timeline .sidebar-skill-group h4 {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #2b3e50;
+  margin-bottom: 2px;
+}
+
+.template-timeline .sidebar-skill-group p {
+  font-size: 8pt;
+  color: #334155;
+  line-height: 1.3;
+}
+
+/* Right Main Column (~68%) with Vertical Timeline Line */
+.template-timeline .timeline-main {
+  flex: 1;
+  position: relative;
+  border-left: 2px solid #cbd5e1; /* Timeline vertical line */
+  padding-left: 22px;
+  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Timeline Section Header with Node Icon */
+.template-timeline .timeline-section {
+  position: relative;
+}
+
+.template-timeline .timeline-icon-badge {
+  position: absolute;
+  left: -35px;
+  top: -2px;
+  width: 24px;
+  height: 24px;
+  background-color: #2b3e50;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px #ffffff;
+  z-index: 2;
+}
+
+.template-timeline .main-section-title {
+  font-size: 10.5pt;
+  font-weight: 800;
+  color: #2b3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid #cbd5e1;
+  margin-bottom: 8px;
+}
+
+.template-timeline .timeline-summary {
+  font-size: 8.5pt;
+  color: #2d3436;
+  font-style: italic;
+  line-height: 1.35;
+  text-align: justify;
+}
+
+/* Timeline Entry Items */
+.template-timeline .timeline-entry {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.template-timeline .timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  background-color: #ffffff;
+  border: 2px solid #2b3e50;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.template-timeline .entry-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.template-timeline .timeline-title {
+  font-size: 9.25pt;
+  font-weight: 700;
+  color: #2b3e50;
+}
+
+.template-timeline .timeline-date {
+  font-size: 8pt;
+  font-weight: 600;
+  color: #636e72;
+  text-transform: uppercase;
+}
+
+.template-timeline .timeline-sub {
+  font-size: 8.25pt;
+  font-weight: 600;
+  color: #485460;
+}
+
+.template-timeline .timeline-tech {
+  font-size: 7.8pt;
+  font-weight: 600;
+  color: #0984e3;
+  margin-top: 1px;
+}
+
+.template-timeline .timeline-bullets {
+  margin-top: 3px;
+  padding-left: 14px;
+  list-style-type: disc;
+}
+
+.template-timeline .timeline-bullets li {
+  font-size: 8.25pt;
+  color: #2d3436;
+  margin-bottom: 2px;
+  line-height: 1.32;
+}
+
+.template-timeline .timeline-bullets li::marker {
+  color: #2b3e50;
+}
+
+/* Responsive adjustments */
 @media (max-width: 900px) {
   body {
     overflow: auto;
@@ -683,13 +880,12 @@ textarea {
 
 /* ==========================================================================
    PRINT / PDF EXPORT ENGINE (@media print)
-   STRICT 1-PAGE A4 OUTPUT RULES
    ========================================================================== */
 
 @media print {
   @page {
     size: A4 portrait;
-    margin: 8mm 10mm; /* Clean minimal margins */
+    margin: 8mm 10mm;
   }
 
   html, body {
@@ -738,9 +934,8 @@ textarea {
     page-break-before: avoid !important;
   }
 
-  /* Ensure text remains sharp and links active */
   a {
-    color: #000000 !important;
+    color: #2b3e50 !important;
     text-decoration: underline !important;
   }
 }

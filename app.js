@@ -4,6 +4,9 @@
 
 // 1. DEFAULT VERIFIED RESUME DATA (Strict facts only, zero invented claims)
 const DEFAULT_RESUME_DATA = {
+  template: "timeline", // "timeline" (as requested in image) or "classic"
+  spacing: "compact",
+
   fullName: "PIYUSH KUMAR",
   headline: "Full Stack Developer | Product Builder | Mechatronics & Data Science Student",
   location: "Purnia, Bihar, India",
@@ -18,7 +21,7 @@ const DEFAULT_RESUME_DATA = {
     {
       id: "edu-1",
       degree: "Bachelor of Technology (B.Tech) – Mechatronics Engineering",
-      institution: "Purnea College of Engineering, Purnia | Bihar Engineering University",
+      institution: "Purnea College of Engineering, Purnia | BEU",
       period: "2025 – 2029",
       details: "CGPA: 7.2 | Currently in 3rd Semester"
     },
@@ -45,8 +48,8 @@ const DEFAULT_RESUME_DATA = {
   projects: [
     {
       id: "proj-1",
-      name: "PCE Mechatronics – Class Management & Student Dashboard",
-      subtitle: "",
+      name: "PCE Mechatronics – Class Management & Dashboard",
+      subtitle: "Active Class App",
       tech: "React.js, Node.js, React Native",
       bullets: [
         "Built a college class-management platform for the Class Representative to manage attendance, student information, class routines, notices, holidays, and academic statistics.",
@@ -58,11 +61,11 @@ const DEFAULT_RESUME_DATA = {
       id: "proj-2",
       name: "Mr Candy – Online Grocery Delivery Application",
       subtitle: "Under Development",
-      tech: "React.js, Tailwind CSS, Node.js, Supabase, PostgreSQL, GPS tracking",
+      tech: "React.js, Tailwind CSS, Node.js, Supabase, PostgreSQL, GPS",
       bullets: [
         "Building a full-stack online grocery delivery application focused on simplifying digital ordering for a local grocery business.",
         "Developing customer and operational workflows using React.js, Node.js, Supabase, and PostgreSQL.",
-        "Integrating GPS tracking to support delivery-oriented functionality and improve order visibility."
+        "Integrating GPS tracking to support delivery-oriented functionality and order visibility."
       ]
     },
     {
@@ -73,18 +76,18 @@ const DEFAULT_RESUME_DATA = {
       bullets: [
         "Built a macOS desktop recording utility using Electron.js and OpenCV for simultaneous screen and webcam recording.",
         "Added audio recording support to create a complete screen-recording workflow.",
-        "Built the tool as a practical alternative to subscription-based recording software and currently use it for personal screen-recording work."
+        "Built tool as practical alternative to subscription-based recording software for personal screen-recording work."
       ]
     },
     {
       id: "proj-4",
       name: "MROOPS – Peer Learning Platform",
-      subtitle: "",
+      subtitle: "Academic Platform",
       tech: "React.js, Node.js",
       bullets: [
         "Built a peer-learning platform for semester-mates to access C programming lectures, notes, and solutions in one place.",
-        "Developed the platform using React.js and Node.js with a focus on simple access to course material.",
-        "Deployed the platform for student use and maintained it as a practical academic resource."
+        "Developed platform using React.js and Node.js with focus on simple access to course material.",
+        "Deployed platform for student use and maintained it as a practical academic resource."
       ]
     }
   ],
@@ -94,7 +97,7 @@ const DEFAULT_RESUME_DATA = {
       id: "cert-1",
       title: "Participant, FedEx Smart Hackathon",
       organization: "Shaastra 2026, IIT Madras / FedEx SMART Initiative",
-      bullet: "Worked on a debt-management problem focused on presenting data through an accessible dashboard and explored a data-pipeline-based approach for organizing and presenting the information."
+      bullet: "Worked on a debt-management problem focused on presenting data through an accessible dashboard and explored a data-pipeline-based approach for organizing information."
     }
   ],
 
@@ -104,32 +107,32 @@ const DEFAULT_RESUME_DATA = {
       title: "Class Representative (CR)",
       organization: "Purnea College of Engineering (3rd Semester)",
       bullets: [
-        "Serve as the primary communication bridge between students and faculty, coordinating academic announcements and class schedule updates.",
+        "Serve as primary communication bridge between students and faculty, coordinating academic announcements and schedule updates.",
         "Manage class attendance workflows, student academic records, and routine class coordination."
       ]
     }
   ]
 };
 
-// 2. STATE MANAGEMENT & STORAGE
+// 2. STATE & STORAGE
 let state = loadState();
 let currentZoom = 1.0;
 
 function loadState() {
   try {
-    const saved = localStorage.getItem("ats_resume_data_v1");
+    const saved = localStorage.getItem("ats_resume_data_v2");
     if (saved) {
       return JSON.parse(saved);
     }
   } catch (e) {
-    console.error("Failed to load saved state", e);
+    console.error("Failed to load state", e);
   }
   return JSON.parse(JSON.stringify(DEFAULT_RESUME_DATA));
 }
 
 function saveState() {
   try {
-    localStorage.setItem("ats_resume_data_v1", JSON.stringify(state));
+    localStorage.setItem("ats_resume_data_v2", JSON.stringify(state));
   } catch (e) {
     console.error("Failed to save state", e);
   }
@@ -142,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkPageFit();
 });
 
-// Tab Switcher
 function switchTab(tabId) {
   document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
   document.querySelectorAll(".tab-pane").forEach(pane => pane.classList.remove("active"));
@@ -152,9 +154,11 @@ function switchTab(tabId) {
   if (targetPane) targetPane.classList.add("active");
 }
 
-// 4. EDITOR POPULATION & EVENT HANDLERS
+// 4. EDITOR POPULATION
 function populateEditorFields() {
-  // Personal info
+  setSelectValue("template-select", state.template || "timeline");
+  setSelectValue("spacing-select", state.spacing || "compact");
+
   setInputValue("input-fullName", state.fullName);
   setInputValue("input-headline", state.headline);
   setInputValue("input-location", state.location);
@@ -163,10 +167,8 @@ function populateEditorFields() {
   setInputValue("input-linkedin", state.linkedin);
   setInputValue("input-github", state.github);
 
-  // Summary
   setInputValue("input-summary", state.summary);
 
-  // Skills
   setInputValue("input-skills-languages", state.skills.languages);
   setInputValue("input-skills-frontend", state.skills.frontend);
   setInputValue("input-skills-backend", state.skills.backend);
@@ -176,7 +178,6 @@ function populateEditorFields() {
   setInputValue("input-skills-design", state.skills.design);
   setInputValue("input-skills-tools", state.skills.tools);
 
-  // Dynamic Array Editors
   renderEducationEditor();
   renderProjectsEditor();
   renderCertEditor();
@@ -188,8 +189,12 @@ function setInputValue(id, val) {
   if (el) el.value = val || "";
 }
 
+function setSelectValue(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val;
+}
+
 function handleInputChange() {
-  // Sync basic inputs to state
   state.fullName = getInputValue("input-fullName");
   state.headline = getInputValue("input-headline");
   state.location = getInputValue("input-location");
@@ -219,9 +224,7 @@ function getInputValue(id) {
   return el ? el.value : "";
 }
 
-// 5. DYNAMIC ARRAYS EDITORS (Education, Projects, Certs, Leadership)
-
-// --- EDUCATION ---
+// 5. ARRAY EDITORS
 function renderEducationEditor() {
   const container = document.getElementById("education-items-container");
   if (!container) return;
@@ -232,7 +235,7 @@ function renderEducationEditor() {
     card.className = "editor-card";
     card.innerHTML = `
       <div class="card-header-actions">
-        <span class="card-title">Education Entry #${index + 1}</span>
+        <span class="card-title">Education #${index + 1}</span>
         <button class="btn btn-danger btn-small" onclick="removeEducationItem(${index})">Remove</button>
       </div>
       <div class="form-group">
@@ -240,16 +243,16 @@ function renderEducationEditor() {
         <input type="text" value="${escapeHtml(item.degree)}" oninput="updateEdu(${index}, 'degree', this.value)">
       </div>
       <div class="form-group">
-        <label>Institution & Board / University</label>
+        <label>Institution</label>
         <input type="text" value="${escapeHtml(item.institution)}" oninput="updateEdu(${index}, 'institution', this.value)">
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Years / Duration</label>
+          <label>Years</label>
           <input type="text" value="${escapeHtml(item.period)}" oninput="updateEdu(${index}, 'period', this.value)">
         </div>
         <div class="form-group">
-          <label>CGPA / Semester Details</label>
+          <label>CGPA / Details</label>
           <input type="text" value="${escapeHtml(item.details)}" oninput="updateEdu(${index}, 'details', this.value)">
         </div>
       </div>
@@ -268,8 +271,8 @@ function updateEdu(index, field, value) {
 function addEducationItem() {
   state.education.push({
     id: "edu-" + Date.now(),
-    degree: "Degree / Course Name",
-    institution: "University / Institution Name",
+    degree: "Degree Name",
+    institution: "Institution",
     period: "2025 – 2029",
     details: "CGPA: 7.0"
   });
@@ -287,7 +290,6 @@ function removeEducationItem(index) {
   checkPageFit();
 }
 
-// --- PROJECTS ---
 function renderProjectsEditor() {
   const container = document.getElementById("projects-items-container");
   if (!container) return;
@@ -307,7 +309,7 @@ function renderProjectsEditor() {
     card.innerHTML = `
       <div class="card-header-actions">
         <span class="card-title">Project #${pIdx + 1}: ${escapeHtml(proj.name)}</span>
-        <button class="btn btn-danger btn-small" onclick="removeProjectItem(${pIdx})">Remove Project</button>
+        <button class="btn btn-danger btn-small" onclick="removeProjectItem(${pIdx})">Remove</button>
       </div>
       <div class="form-group">
         <label>Project Name</label>
@@ -315,7 +317,7 @@ function renderProjectsEditor() {
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Status / Subtitle (Optional)</label>
+          <label>Subtitle / Status</label>
           <input type="text" value="${escapeHtml(proj.subtitle || '')}" oninput="updateProject(${pIdx}, 'subtitle', this.value)">
         </div>
         <div class="form-group">
@@ -324,9 +326,9 @@ function renderProjectsEditor() {
         </div>
       </div>
       <div class="bullets-editor">
-        <label>Bullet Points (Honest, ATS impact statements)</label>
+        <label>Bullets</label>
         ${bulletsHtml}
-        <button class="btn btn-small btn-secondary" onclick="addProjectBullet(${pIdx})">+ Add Bullet Point</button>
+        <button class="btn btn-small btn-secondary" onclick="addProjectBullet(${pIdx})">+ Add Bullet</button>
       </div>
     `;
     container.appendChild(card);
@@ -385,7 +387,6 @@ function removeProjectItem(pIdx) {
   checkPageFit();
 }
 
-// --- CERTIFICATIONS ---
 function renderCertEditor() {
   const container = document.getElementById("cert-items-container");
   if (!container) return;
@@ -396,19 +397,19 @@ function renderCertEditor() {
     card.className = "editor-card";
     card.innerHTML = `
       <div class="card-header-actions">
-        <span class="card-title">Certification / Hackathon #${index + 1}</span>
+        <span class="card-title">Cert / Hackathon #${index + 1}</span>
         <button class="btn btn-danger btn-small" onclick="removeCertItem(${index})">Remove</button>
       </div>
       <div class="form-group">
-        <label>Title / Role</label>
+        <label>Title</label>
         <input type="text" value="${escapeHtml(item.title)}" oninput="updateCert(${index}, 'title', this.value)">
       </div>
       <div class="form-group">
-        <label>Organization / Event Details</label>
+        <label>Organization</label>
         <input type="text" value="${escapeHtml(item.organization)}" oninput="updateCert(${index}, 'organization', this.value)">
       </div>
       <div class="form-group">
-        <label>Honest Bullet / Activity Description</label>
+        <label>Description Bullet</label>
         <textarea rows="2" oninput="updateCert(${index}, 'bullet', this.value)">${escapeHtml(item.bullet)}</textarea>
       </div>
     `;
@@ -426,9 +427,9 @@ function updateCert(index, field, val) {
 function addCertItem() {
   state.certifications.push({
     id: "cert-" + Date.now(),
-    title: "Participant / Certificate Name",
+    title: "Participant / Certificate",
     organization: "Event / Organization",
-    bullet: "Participated and built solution during technical event."
+    bullet: "Participated and built technical solution."
   });
   saveState();
   renderCertEditor();
@@ -444,7 +445,6 @@ function removeCertItem(index) {
   checkPageFit();
 }
 
-// --- LEADERSHIP ---
 function renderLeadershipEditor() {
   const container = document.getElementById("leadership-items-container");
   if (!container) return;
@@ -467,15 +467,15 @@ function renderLeadershipEditor() {
         <button class="btn btn-danger btn-small" onclick="removeLeadershipItem(${lIdx})">Remove</button>
       </div>
       <div class="form-group">
-        <label>Position / Role Title</label>
+        <label>Role Title</label>
         <input type="text" value="${escapeHtml(lead.title)}" oninput="updateLeadership(${lIdx}, 'title', this.value)">
       </div>
       <div class="form-group">
-        <label>Organization / Scope</label>
+        <label>Organization</label>
         <input type="text" value="${escapeHtml(lead.organization)}" oninput="updateLeadership(${lIdx}, 'organization', this.value)">
       </div>
       <div class="bullets-editor">
-        <label>Key Responsibilities</label>
+        <label>Bullets</label>
         ${bulletsHtml}
         <button class="btn btn-small btn-secondary" onclick="addLeadershipBullet(${lIdx})">+ Add Bullet</button>
       </div>
@@ -499,7 +499,7 @@ function updateLeadershipBullet(lIdx, bIdx, val) {
 }
 
 function addLeadershipBullet(lIdx) {
-  state.leadership[lIdx].bullets.push("Coordinated student and organizational initiatives.");
+  state.leadership[lIdx].bullets.push("Coordinated student and academic activities.");
   saveState();
   renderLeadershipEditor();
   renderPreview();
@@ -517,8 +517,8 @@ function removeLeadershipBullet(lIdx, bIdx) {
 function addLeadershipItem() {
   state.leadership.push({
     id: "lead-" + Date.now(),
-    title: "Leadership Role Title",
-    organization: "Organization / Institution",
+    title: "Leadership Role",
+    organization: "Organization",
     bullets: ["Coordinated student and organizational activities."]
   });
   saveState();
@@ -535,139 +535,306 @@ function removeLeadershipItem(lIdx) {
   checkPageFit();
 }
 
-// 6. PREVIEW RENDERER (Clean ATS single-column layout)
+// 6. DYNAMIC PREVIEW RENDERER (Supports Timeline & Classic layouts)
 function renderPreview() {
-  // Header
-  setTextContent("preview-fullName", state.fullName);
-  setTextContent("preview-headline", state.headline);
+  const paper = document.getElementById("resume-paper");
+  if (!paper) return;
 
-  // Contact Bar with Clickable Links
-  const contactBar = document.getElementById("preview-contactBar");
-  if (contactBar) {
-    const parts = [];
-    if (state.location) parts.push(`<span>${escapeHtml(state.location)}</span>`);
-    if (state.phone) parts.push(`<span>${escapeHtml(state.phone)}</span>`);
-    if (state.email) parts.push(`<a href="mailto:${escapeHtml(state.email)}">${escapeHtml(state.email)}</a>`);
-    if (state.linkedin) parts.push(`<a href="${escapeHtml(state.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
-    if (state.github) parts.push(`<a href="${escapeHtml(state.github)}" target="_blank" rel="noopener">GitHub</a>`);
+  const t = state.template || "timeline";
+  const s = state.spacing || "compact";
 
-    contactBar.innerHTML = parts.join(' <span class="contact-sep">•</span> ');
+  paper.className = `resume-paper density-${s} template-${t}`;
+
+  if (t === "timeline") {
+    renderTimelineTemplate(paper);
+  } else {
+    renderClassicTemplate(paper);
   }
+}
 
-  // Summary
-  setTextContent("preview-summary", state.summary);
-  toggleSectionVisibility("sec-summary", !!state.summary.trim());
+// TEMPLATE 2: MODERN EXECUTIVE TIMELINE (As seen in requested image)
+function renderTimelineTemplate(paper) {
+  const s = state.skills;
 
-  // Education
-  const eduContainer = document.getElementById("preview-education-list");
-  if (eduContainer) {
-    eduContainer.innerHTML = state.education.map(item => `
-      <div class="entry-item">
-        <div class="entry-head">
-          <span class="entry-title">${escapeHtml(item.degree)}</span>
-          <span class="entry-date">${escapeHtml(item.period)}</span>
-        </div>
-        <div class="entry-head">
-          <span class="entry-subtitle">${escapeHtml(item.institution)}</span>
-          <span class="entry-location">${escapeHtml(item.details)}</span>
-        </div>
+  const projectsHtml = state.projects.map(p => `
+    <div class="timeline-entry">
+      <div class="entry-header-row">
+        <span class="timeline-title">${escapeHtml(p.name)}</span>
+        ${p.subtitle ? `<span class="timeline-date">${escapeHtml(p.subtitle)}</span>` : ''}
       </div>
-    `).join("");
-  }
-  toggleSectionVisibility("sec-education", state.education.length > 0);
+      ${p.tech ? `<div class="timeline-tech">Tech: ${escapeHtml(p.tech)}</div>` : ''}
+      <ul class="timeline-bullets">
+        ${p.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
 
-  // Skills
-  const skillsContainer = document.getElementById("preview-skills-grid");
-  if (skillsContainer) {
-    const s = state.skills;
-    const lines = [];
-    if (s.languages) lines.push(`<div class="skill-line"><span class="skill-category">Programming Languages:</span> ${escapeHtml(s.languages)}</div>`);
-    if (s.frontend) lines.push(`<div class="skill-line"><span class="skill-category">Frontend:</span> ${escapeHtml(s.frontend)}</div>`);
-    if (s.backend) lines.push(`<div class="skill-line"><span class="skill-category">Backend:</span> ${escapeHtml(s.backend)}</div>`);
-    if (s.databases) lines.push(`<div class="skill-line"><span class="skill-category">Databases & Services:</span> ${escapeHtml(s.databases)}</div>`);
-    if (s.mobile) lines.push(`<div class="skill-line"><span class="skill-category">Mobile:</span> ${escapeHtml(s.mobile)}</div>`);
-    if (s.desktop) lines.push(`<div class="skill-line"><span class="skill-category">Desktop & Computer Vision:</span> ${escapeHtml(s.desktop)}</div>`);
-    if (s.design) lines.push(`<div class="skill-line"><span class="skill-category">Design:</span> ${escapeHtml(s.design)}</div>`);
-    if (s.tools) lines.push(`<div class="skill-line"><span class="skill-category">Developer Tools:</span> ${escapeHtml(s.tools)}</div>`);
-
-    skillsContainer.innerHTML = lines.join("");
-  }
-
-  // Projects
-  const projContainer = document.getElementById("preview-projects-list");
-  if (projContainer) {
-    projContainer.innerHTML = state.projects.map(proj => {
-      const sub = proj.subtitle ? ` <span style="font-weight: normal; color: #475569;">(${escapeHtml(proj.subtitle)})</span>` : '';
-      const bullets = proj.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("");
-      return `
-        <div class="entry-item">
-          <div class="entry-head">
-            <span class="entry-title">${escapeHtml(proj.name)}${sub}</span>
-          </div>
-          ${proj.tech ? `<div class="entry-tech">Technologies: ${escapeHtml(proj.tech)}</div>` : ''}
-          <ul class="entry-bullets">
-            ${bullets}
-          </ul>
-        </div>
-      `;
-    }).join("");
-  }
-  toggleSectionVisibility("sec-projects", state.projects.length > 0);
-
-  // Certifications / Hackathons
-  const certContainer = document.getElementById("preview-cert-list");
-  if (certContainer) {
-    certContainer.innerHTML = state.certifications.map(item => `
-      <div class="entry-item">
-        <div class="entry-head">
-          <span class="entry-title">${escapeHtml(item.title)}</span>
-        </div>
-        <div class="entry-subtitle">${escapeHtml(item.organization)}</div>
-        ${item.bullet ? `<ul class="entry-bullets"><li>${escapeHtml(item.bullet)}</li></ul>` : ''}
+  const eduHtml = state.education.map(e => `
+    <div class="timeline-entry">
+      <div class="entry-header-row">
+        <span class="timeline-title">${escapeHtml(e.degree)}</span>
+        <span class="timeline-date">${escapeHtml(e.period)}</span>
       </div>
-    `).join("");
-  }
-  toggleSectionVisibility("sec-certification", state.certifications.length > 0);
+      <div class="timeline-sub">${escapeHtml(e.institution)} (${escapeHtml(e.details)})</div>
+    </div>
+  `).join("");
 
-  // Leadership
-  const leadContainer = document.getElementById("preview-leadership-list");
-  if (leadContainer) {
-    leadContainer.innerHTML = state.leadership.map(lead => {
-      const bullets = lead.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("");
-      return `
-        <div class="entry-item">
-          <div class="entry-head">
-            <span class="entry-title">${escapeHtml(lead.title)}</span>
+  const certHtml = state.certifications.map(c => `
+    <div class="timeline-entry">
+      <div class="entry-header-row">
+        <span class="timeline-title">${escapeHtml(c.title)}</span>
+      </div>
+      <div class="timeline-sub">${escapeHtml(c.organization)}</div>
+      ${c.bullet ? `<ul class="timeline-bullets"><li>${escapeHtml(c.bullet)}</li></ul>` : ''}
+    </div>
+  `).join("");
+
+  const leadHtml = state.leadership.map(l => `
+    <div class="sidebar-skill-group">
+      <h4>${escapeHtml(l.title)}</h4>
+      <p style="font-weight:600; color:#576574;">${escapeHtml(l.organization)}</p>
+      <ul style="padding-left:12px; font-size:7.8pt; margin-top:2px;">
+        ${l.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
+
+  paper.innerHTML = `
+    <!-- Top Header -->
+    <header class="timeline-header">
+      <h1>${escapeHtml(state.fullName)}</h1>
+      <div class="timeline-headline">${escapeHtml(state.headline)}</div>
+    </header>
+
+    <!-- Two-Column Timeline Layout -->
+    <div class="timeline-layout">
+      <!-- Left Sidebar (Contact, Skills, Leadership) -->
+      <aside class="timeline-sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-section-title">CONTACT</h3>
+          <div class="contact-list">
+            ${state.phone ? `<div class="contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span>${escapeHtml(state.phone)}</span></div>` : ''}
+            ${state.email ? `<div class="contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <a href="mailto:${escapeHtml(state.email)}">${escapeHtml(state.email)}</a></div>` : ''}
+            ${state.location ? `<div class="contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>${escapeHtml(state.location)}</span></div>` : ''}
+            ${state.linkedin ? `<div class="contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg> <a href="${escapeHtml(state.linkedin)}" target="_blank">LinkedIn</a></div>` : ''}
+            ${state.github ? `<div class="contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> <a href="${escapeHtml(state.github)}" target="_blank">GitHub</a></div>` : ''}
           </div>
-          <div class="entry-subtitle">${escapeHtml(lead.organization)}</div>
-          <ul class="entry-bullets">
-            ${bullets}
-          </ul>
         </div>
-      `;
-    }).join("");
-  }
-  toggleSectionVisibility("sec-leadership", state.leadership.length > 0);
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-section-title">SKILLS</h3>
+          ${s.languages ? `<div class="sidebar-skill-group"><h4>Languages</h4><p>${escapeHtml(s.languages)}</p></div>` : ''}
+          ${s.frontend ? `<div class="sidebar-skill-group"><h4>Frontend</h4><p>${escapeHtml(s.frontend)}</p></div>` : ''}
+          ${s.backend ? `<div class="sidebar-skill-group"><h4>Backend</h4><p>${escapeHtml(s.backend)}</p></div>` : ''}
+          ${s.databases ? `<div class="sidebar-skill-group"><h4>Databases</h4><p>${escapeHtml(s.databases)}</p></div>` : ''}
+          ${s.mobile ? `<div class="sidebar-skill-group"><h4>Mobile</h4><p>${escapeHtml(s.mobile)}</p></div>` : ''}
+          ${s.desktop ? `<div class="sidebar-skill-group"><h4>Desktop/CV</h4><p>${escapeHtml(s.desktop)}</p></div>` : ''}
+          ${s.tools ? `<div class="sidebar-skill-group"><h4>Tools</h4><p>${escapeHtml(s.tools)}</p></div>` : ''}
+        </div>
+
+        ${state.leadership.length > 0 ? `
+          <div class="sidebar-section">
+            <h3 class="sidebar-section-title">LEADERSHIP</h3>
+            ${leadHtml}
+          </div>
+        ` : ''}
+      </aside>
+
+      <!-- Right Main Column with Vertical Line & Section Nodes -->
+      <main class="timeline-main">
+        
+        <!-- PROFILE -->
+        ${state.summary ? `
+          <div class="timeline-section">
+            <div class="timeline-icon-badge" title="Profile Summary">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <h3 class="main-section-title">PROFILE</h3>
+            <p class="timeline-summary">${escapeHtml(state.summary)}</p>
+          </div>
+        ` : ''}
+
+        <!-- PROJECTS -->
+        ${state.projects.length > 0 ? `
+          <div class="timeline-section">
+            <div class="timeline-icon-badge" title="Projects & Experience">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <h3 class="main-section-title">PROJECTS & EXPERIENCE</h3>
+            ${projectsHtml}
+          </div>
+        ` : ''}
+
+        <!-- EDUCATION -->
+        ${state.education.length > 0 ? `
+          <div class="timeline-section">
+            <div class="timeline-icon-badge" title="Education">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </div>
+            <h3 class="main-section-title">EDUCATION</h3>
+            ${eduHtml}
+          </div>
+        ` : ''}
+
+        <!-- CERTIFICATION & HACKATHONS -->
+        ${state.certifications.length > 0 ? `
+          <div class="timeline-section">
+            <div class="timeline-icon-badge" title="Certifications & Hackathons">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            </div>
+            <h3 class="main-section-title">CERTIFICATIONS & HACKATHONS</h3>
+            ${certHtml}
+          </div>
+        ` : ''}
+
+      </main>
+    </div>
+  `;
 }
 
-function setTextContent(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text || "";
+// TEMPLATE 1: CLASSIC SINGLE-COLUMN ATS
+function renderClassicTemplate(paper) {
+  const contactParts = [];
+  if (state.location) contactParts.push(`<span>${escapeHtml(state.location)}</span>`);
+  if (state.phone) contactParts.push(`<span>${escapeHtml(state.phone)}</span>`);
+  if (state.email) contactParts.push(`<a href="mailto:${escapeHtml(state.email)}">${escapeHtml(state.email)}</a>`);
+  if (state.linkedin) contactParts.push(`<a href="${escapeHtml(state.linkedin)}" target="_blank">LinkedIn</a>`);
+  if (state.github) contactParts.push(`<a href="${escapeHtml(state.github)}" target="_blank">GitHub</a>`);
+
+  const s = state.skills;
+  const skillLines = [];
+  if (s.languages) skillLines.push(`<div class="skill-line"><span class="skill-category">Programming Languages:</span> ${escapeHtml(s.languages)}</div>`);
+  if (s.frontend) skillLines.push(`<div class="skill-line"><span class="skill-category">Frontend:</span> ${escapeHtml(s.frontend)}</div>`);
+  if (s.backend) skillLines.push(`<div class="skill-line"><span class="skill-category">Backend:</span> ${escapeHtml(s.backend)}</div>`);
+  if (s.databases) skillLines.push(`<div class="skill-line"><span class="skill-category">Databases & Services:</span> ${escapeHtml(s.databases)}</div>`);
+  if (s.mobile) skillLines.push(`<div class="skill-line"><span class="skill-category">Mobile:</span> ${escapeHtml(s.mobile)}</div>`);
+  if (s.desktop) skillLines.push(`<div class="skill-line"><span class="skill-category">Desktop & Computer Vision:</span> ${escapeHtml(s.desktop)}</div>`);
+  if (s.design) skillLines.push(`<div class="skill-line"><span class="skill-category">Design:</span> ${escapeHtml(s.design)}</div>`);
+  if (s.tools) skillLines.push(`<div class="skill-line"><span class="skill-category">Developer Tools:</span> ${escapeHtml(s.tools)}</div>`);
+
+  paper.innerHTML = `
+    <header class="resume-header">
+      <h1>${escapeHtml(state.fullName)}</h1>
+      <p class="resume-headline">${escapeHtml(state.headline)}</p>
+      <div class="resume-contact-bar">
+        ${contactParts.join(' <span class="contact-sep">•</span> ')}
+      </div>
+    </header>
+
+    ${state.summary ? `
+      <section class="resume-section">
+        <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+        <div class="section-divider"></div>
+        <p class="summary-text">${escapeHtml(state.summary)}</p>
+      </section>
+    ` : ''}
+
+    ${state.education.length > 0 ? `
+      <section class="resume-section">
+        <h2 class="section-title">EDUCATION</h2>
+        <div class="section-divider"></div>
+        <div class="entries-list">
+          ${state.education.map(e => `
+            <div class="entry-item">
+              <div class="entry-head">
+                <span class="entry-title">${escapeHtml(e.degree)}</span>
+                <span class="entry-date">${escapeHtml(e.period)}</span>
+              </div>
+              <div class="entry-head">
+                <span class="entry-subtitle">${escapeHtml(e.institution)}</span>
+                <span class="entry-location">${escapeHtml(e.details)}</span>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    ` : ''}
+
+    ${skillLines.length > 0 ? `
+      <section class="resume-section">
+        <h2 class="section-title">TECHNICAL SKILLS</h2>
+        <div class="section-divider"></div>
+        <div class="skills-grid">${skillLines.join("")}</div>
+      </section>
+    ` : ''}
+
+    ${state.projects.length > 0 ? `
+      <section class="resume-section">
+        <h2 class="section-title">PROJECTS</h2>
+        <div class="section-divider"></div>
+        <div class="entries-list">
+          ${state.projects.map(p => `
+            <div class="entry-item">
+              <div class="entry-head">
+                <span class="entry-title">${escapeHtml(p.name)}${p.subtitle ? ` <span style="font-weight:normal;color:#475569;">(${escapeHtml(p.subtitle)})</span>` : ''}</span>
+              </div>
+              ${p.tech ? `<div class="entry-tech">Technologies: ${escapeHtml(p.tech)}</div>` : ''}
+              <ul class="entry-bullets">
+                ${p.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+              </ul>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    ` : ''}
+
+    ${state.certifications.length > 0 ? `
+      <section class="resume-section">
+        <h2 class="section-title">CERTIFICATION & HACKATHONS</h2>
+        <div class="section-divider"></div>
+        <div class="entries-list">
+          ${state.certifications.map(c => `
+            <div class="entry-item">
+              <div class="entry-head"><span class="entry-title">${escapeHtml(c.title)}</span></div>
+              <div class="entry-subtitle">${escapeHtml(c.organization)}</div>
+              ${c.bullet ? `<ul class="entry-bullets"><li>${escapeHtml(c.bullet)}</li></ul>` : ''}
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    ` : ''}
+
+    ${state.leadership.length > 0 ? `
+      <section class="resume-section">
+        <h2 class="section-title">LEADERSHIP</h2>
+        <div class="section-divider"></div>
+        <div class="entries-list">
+          ${state.leadership.map(l => `
+            <div class="entry-item">
+              <div class="entry-head"><span class="entry-title">${escapeHtml(l.title)}</span></div>
+              <div class="entry-subtitle">${escapeHtml(l.organization)}</div>
+              <ul class="entry-bullets">
+                ${l.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
+              </ul>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    ` : ''}
+  `;
 }
 
-function toggleSectionVisibility(id, show) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = show ? "block" : "none";
+// 7. UTILITIES
+function updateTemplate(val) {
+  state.template = val;
+  saveState();
+  renderPreview();
+  checkPageFit();
 }
 
-// 7. UTILITY & FIT CHECKING
+function updateSpacing(density) {
+  state.spacing = density;
+  saveState();
+  renderPreview();
+  checkPageFit();
+}
+
 function checkPageFit() {
   setTimeout(() => {
     const paper = document.getElementById("resume-paper");
     const fitBadge = document.getElementById("page-fit-badge");
     if (!paper || !fitBadge) return;
 
-    // Standard A4 pixel height benchmark (approx 1122px at standard DPI)
     const paperHeight = paper.offsetHeight;
     const maxHeight = 1125; 
 
@@ -679,14 +846,6 @@ function checkPageFit() {
       fitBadge.textContent = `⚠ Overflow (${Math.round(paperHeight - maxHeight)}px) - Change Density to Compact`;
     }
   }, 100);
-}
-
-function updateSpacing(density) {
-  const paper = document.getElementById("resume-paper");
-  if (!paper) return;
-  paper.classList.remove("density-normal", "density-compact", "density-tight");
-  paper.classList.add(`density-${density}`);
-  checkPageFit();
 }
 
 function toggleZoom(delta) {

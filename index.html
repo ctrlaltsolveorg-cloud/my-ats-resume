@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="app" class="app-container">
@@ -26,16 +26,26 @@
         </div>
         <div class="brand-text">
           <h1>ATS Resume Studio</h1>
-          <span class="badge-tag">1-Page A4 ATS Compliant</span>
+          <span class="badge-tag">1-Page A4 Resume</span>
         </div>
       </div>
 
       <div class="header-actions">
+        <!-- Template Layout Selector -->
+        <div class="density-control" title="Choose template design layout">
+          <label for="template-select">Template:</label>
+          <select id="template-select" onchange="updateTemplate(this.value)">
+            <option value="timeline" selected>Modern Timeline (As Requested)</option>
+            <option value="classic">Classic ATS (Single Column)</option>
+          </select>
+        </div>
+
+        <!-- Spacing Density Control -->
         <div class="density-control" title="Adjust document spacing density to fit text on 1 A4 page">
           <label for="spacing-select">Density:</label>
           <select id="spacing-select" onchange="updateSpacing(this.value)">
-            <option value="normal">Standard (Default)</option>
-            <option value="compact" selected>Compact (Recommended 1-Page)</option>
+            <option value="normal">Standard</option>
+            <option value="compact" selected>Compact (1-Page)</option>
             <option value="tight">Ultra Tight</option>
           </select>
         </div>
@@ -133,7 +143,7 @@
 
           <!-- TAB 4: Technical Skills -->
           <div id="skills-tab" class="tab-pane">
-            <p class="field-hint mb-3">Listed as standard text groups (ATS best practice). No progress bars or ratings.</p>
+            <p class="field-hint mb-3">Listed as text groups. No progress bars or ratings.</p>
             <div class="form-group">
               <label>Programming Languages</label>
               <input type="text" id="input-skills-languages" oninput="handleInputChange()">
@@ -206,60 +216,9 @@
 
         <!-- Scrollable Canvas Wrapper -->
         <div class="preview-viewport" id="preview-viewport">
-          <!-- The Printable A4 Resume Document -->
-          <div id="resume-paper" class="resume-paper density-compact">
-            
-            <!-- HEADER SECTION -->
-            <header class="resume-header">
-              <h1 id="preview-fullName">PIYUSH KUMAR</h1>
-              <p class="resume-headline" id="preview-headline">Full Stack Developer | Product Builder | Mechatronics & Data Science Student</p>
-              <div class="resume-contact-bar" id="preview-contactBar">
-                <!-- Generated Contact Elements -->
-              </div>
-            </header>
-
-            <!-- PROFESSIONAL SUMMARY -->
-            <section class="resume-section" id="sec-summary">
-              <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
-              <div class="section-divider"></div>
-              <p class="summary-text" id="preview-summary"></p>
-            </section>
-
-            <!-- EDUCATION -->
-            <section class="resume-section" id="sec-education">
-              <h2 class="section-title">EDUCATION</h2>
-              <div class="section-divider"></div>
-              <div id="preview-education-list" class="entries-list"></div>
-            </section>
-
-            <!-- TECHNICAL SKILLS -->
-            <section class="resume-section" id="sec-skills">
-              <h2 class="section-title">TECHNICAL SKILLS</h2>
-              <div class="section-divider"></div>
-              <div class="skills-grid" id="preview-skills-grid"></div>
-            </section>
-
-            <!-- PROJECTS -->
-            <section class="resume-section" id="sec-projects">
-              <h2 class="section-title">PROJECTS</h2>
-              <div class="section-divider"></div>
-              <div id="preview-projects-list" class="entries-list"></div>
-            </section>
-
-            <!-- CERTIFICATION / HACKATHON -->
-            <section class="resume-section" id="sec-certification">
-              <h2 class="section-title">CERTIFICATION & HACKATHONS</h2>
-              <div class="section-divider"></div>
-              <div id="preview-cert-list" class="entries-list"></div>
-            </section>
-
-            <!-- LEADERSHIP -->
-            <section class="resume-section" id="sec-leadership">
-              <h2 class="section-title">LEADERSHIP</h2>
-              <div class="section-divider"></div>
-              <div id="preview-leadership-list" class="entries-list"></div>
-            </section>
-
+          <!-- The Printable A4 Resume Document (Container populated dynamically by app.js) -->
+          <div id="resume-paper" class="resume-paper density-compact template-timeline">
+            <!-- Rendered content inserted by app.js -->
           </div>
         </div>
       </section>
