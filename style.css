@@ -513,7 +513,7 @@ textarea {
   font-size: var(--res-font-name);
   font-weight: 800;
   letter-spacing: 0.04em;
-  color: #000000;
+  color: #0f172a; /* Deep Slate Navy */
   text-transform: uppercase;
   margin-bottom: 2px;
 }
@@ -521,7 +521,7 @@ textarea {
 .resume-headline {
   font-size: var(--res-font-title);
   font-weight: 600;
-  color: #334155;
+  color: #1e40af; /* Rich Indigo Accent */
   margin-bottom: 4px;
 }
 
@@ -536,10 +536,16 @@ textarea {
 }
 
 .resume-contact-bar a {
-  color: #0f172a;
+  color: #1d4ed8; /* Vibrant Royal Blue Link */
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(29, 78, 216, 0.4);
   text-underline-offset: 2px;
+  font-weight: 500;
+}
+
+.resume-contact-bar a:hover {
+  color: #1e40af;
+  text-decoration-color: #1e40af;
 }
 
 .contact-sep {
@@ -554,16 +560,17 @@ textarea {
 .section-title {
   font-size: var(--res-font-heading);
   font-weight: 700;
-  color: #000000;
+  color: #0f2942; /* Deep Navy Section Header */
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
 
 .section-divider {
-  height: 1px;
-  background-color: #000000;
-  margin-bottom: 5px;
+  height: 2px;
+  background: linear-gradient(to right, #1d4ed8 0%, #3b82f6 35%, #cbd5e1 100%); /* Elegant Gradient Accent Divider */
+  margin-bottom: 6px;
+  border-radius: 1px;
 }
 
 /* Professional Summary Paragraph */
@@ -594,7 +601,7 @@ textarea {
 .entry-title {
   font-size: var(--res-font-subheading);
   font-weight: 700;
-  color: #000000;
+  color: #0f172a; /* Deep Charcoal Title */
 }
 
 .entry-subtitle {
@@ -606,16 +613,15 @@ textarea {
 .entry-location,
 .entry-date {
   font-size: var(--res-font-meta);
-  font-weight: 500;
+  font-weight: 600;
   color: #475569;
   white-space: nowrap;
 }
 
 .entry-tech {
   font-size: var(--res-font-meta);
-  font-weight: 500;
-  color: #475569;
-  font-style: italic;
+  font-weight: 600;
+  color: #0369a1; /* Ocean Blue Tech Stack Accent */
   margin-top: 1px;
 }
 
@@ -633,11 +639,15 @@ textarea {
   padding-left: 2px;
 }
 
+.entry-bullets li::marker {
+  color: #2563eb; /* Blue Bullet Accent */
+}
+
 /* Technical Skills Grid */
 .skills-grid {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 3.5px;
 }
 
 .skill-line {
@@ -647,7 +657,8 @@ textarea {
 
 .skill-category {
   font-weight: 700;
-  color: #000000;
+  color: #0f2942; /* Deep Navy Skill Category */
+}
 }
 
 /* Responsive adjustments for smaller screens */
