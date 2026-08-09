@@ -210,6 +210,7 @@ body {
   justify-content: center;
   padding: 8px;
   margin-top: 10px;
+  font-weight: 600;
 }
 .btn-outline:hover {
   background: rgba(168, 85, 247, 0.12);
@@ -567,7 +568,7 @@ body {
 }
 
 /* ==========================================================================
-   WORKSPACE SPLIT AREA (Editor + Preview - Deep Purple Theme)
+   WORKSPACE SPLIT AREA (Editor + Preview - Clear Guidance UI)
    ========================================================================== */
 
 .workspace {
@@ -583,7 +584,7 @@ body {
   width: 480px;
   min-width: 360px;
   max-width: 540px;
-  background-color: rgba(20, 14, 40, 0.9);
+  background-color: rgba(20, 14, 40, 0.92);
   backdrop-filter: blur(16px);
   border-right: 1px solid var(--border-color);
   display: flex;
@@ -591,22 +592,85 @@ body {
   overflow: hidden;
 }
 
+/* Editor Top Header & Visual 3-Step Process */
 .editor-header {
-  padding: 14px 18px 10px 18px;
+  padding: 12px 16px 10px 16px;
   border-bottom: 1px solid var(--border-color);
-  background: rgba(15, 10, 32, 0.4);
+  background: rgba(15, 10, 32, 0.5);
 }
 
-.editor-header h2 {
+.editor-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.editor-title-row h2 {
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #ffffff;
 }
 
-.editor-header p {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 2px;
+.editor-quick-guide {
+  display: flex;
+  gap: 6px;
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.guide-step {
+  flex: 1;
+  font-size: 0.7rem;
+  color: #c084fc;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.step-num {
+  width: 16px;
+  height: 16px;
+  background: #a855f7;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Section Instruction Banners inside Tabs */
+.section-banner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+
+.banner-icon {
+  font-size: 1.3rem;
+}
+
+.section-banner h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.section-banner p {
+  font-size: 0.72rem;
+  color: #a5a1b8;
+  margin-top: 1px;
 }
 
 /* Tabs Header */
@@ -619,12 +683,12 @@ body {
 }
 
 .tab-btn {
-  padding: 8px 12px;
+  padding: 9px 12px;
   background: transparent;
   border: none;
   color: var(--text-muted);
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   border-bottom: 2px solid transparent;
@@ -633,12 +697,13 @@ body {
 
 .tab-btn:hover {
   color: var(--text-main);
+  background-color: rgba(168, 85, 247, 0.05);
 }
 
 .tab-btn.active {
   color: #c084fc;
   border-bottom-color: #a855f7;
-  background-color: rgba(168, 85, 247, 0.12);
+  background-color: rgba(168, 85, 247, 0.15);
 }
 
 /* Form Container */
@@ -673,7 +738,7 @@ body {
 label {
   display: block;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-main);
   margin-bottom: 4px;
 }
@@ -687,7 +752,7 @@ select {
   background-color: var(--input-bg);
   border: 1px solid var(--border-color);
   color: #ffffff;
-  padding: 7px 10px;
+  padding: 8px 11px;
   border-radius: 6px;
   font-size: 0.82rem;
   font-family: inherit;
@@ -707,8 +772,9 @@ textarea {
 .field-hint {
   display: block;
   font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-top: 3px;
+  color: #c084fc;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
 /* Dynamic Array Cards in Editor */
@@ -731,7 +797,7 @@ textarea {
 
 .card-title {
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #c084fc;
 }
 
@@ -999,7 +1065,7 @@ textarea {
 }
 
 /* ==========================================================================
-   TEMPLATE 2: MODERN EXECUTIVE TIMELINE (MATCHING REFERENCE IMAGE)
+   TEMPLATE 2: MODERN EXECUTIVE TIMELINE
    ========================================================================== */
 
 .template-timeline .timeline-header {
