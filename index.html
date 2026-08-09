@@ -34,11 +34,13 @@
       <!-- Navigation & Controls -->
       <div class="header-actions">
         <button id="btn-landing-view" class="btn btn-secondary btn-small" onclick="showLanding()">
-          🏠 Home
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Home
         </button>
 
         <button id="btn-editor-view" class="btn btn-secondary btn-small" onclick="showEditor()">
-          ✏️ Editor Mode
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Editor
         </button>
 
         <div class="density-control editor-only-control" title="Choose template design layout">
@@ -95,7 +97,7 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <div class="hero-badge">
-              <span class="pulse-dot"></span> #1 ATS-Optimized Engineering Resume Builder
+              <span class="pulse-dot"></span> ATS-Optimized Engineering Resume Builder
             </div>
             
             <h1 class="hero-title">
@@ -110,12 +112,14 @@
 
             <div class="hero-cta-group">
               <button class="hero-btn-primary" onclick="showEditor()">
-                🚀 Launch Live Resume Editor
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Launch Resume Editor
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
 
               <button class="hero-btn-secondary" onclick="showEditor(); triggerPrint();">
-                📄 Direct PDF Download
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                Direct PDF Download
               </button>
             </div>
 
@@ -149,7 +153,7 @@
                 </div>
               </div>
               <div class="click-overlay">
-                <span>✏️ Click to Edit Live Resume</span>
+                <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Click to Edit Live Resume</span>
               </div>
             </div>
 
@@ -162,19 +166,25 @@
 
         <div class="feature-cards-grid">
           <div class="feature-card" onclick="showEditor()">
-            <div class="card-icon">🎯</div>
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
             <h3>1-Page A4 Precision</h3>
             <p>Smart height fit guard ensures your resume never overflows onto an accidental second page.</p>
           </div>
 
           <div class="feature-card" onclick="showEditor()">
-            <div class="card-icon">⚡</div>
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
             <h3>Dual Layout Engine</h3>
             <p>Switch seamlessly between Classic Single-Column ATS and Modern Executive Timeline layouts.</p>
           </div>
 
           <div class="feature-card" onclick="showEditor()">
-            <div class="card-icon">🔒</div>
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
             <h3>Zero Data & Private</h3>
             <p>Runs 100% locally in your browser with zero npm internet downloads. Auto-saved in localStorage.</p>
           </div>
@@ -183,35 +193,52 @@
       </div>
     </section>
 
-    <!-- MAIN EDITOR WORKSPACE PANEL (WITH HYPER-CLEAR GUIDANCE & VISUAL TABS) -->
+    <!-- MAIN EDITOR WORKSPACE PANEL -->
     <main class="workspace" id="editor-workspace" style="display: none;">
       <!-- Left Controls Panel -->
       <aside class="editor-panel no-print" id="editor-panel">
         
-        <!-- Editor Top Header & Visual 3-Step Guide -->
+        <!-- Editor Top Header -->
         <div class="editor-header">
           <div class="editor-title-row">
-            <h2>✏️ Resume Content Editor</h2>
-            <button class="btn btn-small btn-secondary" onclick="resetToDefault()" title="Reset to original verified resume data">✨ Load Verified Resume</button>
-          </div>
-
-          <!-- 3-Step Visual Process Bar -->
-          <div class="editor-quick-guide">
-            <div class="guide-step"><span class="step-num">1</span> Click Tab Below</div>
-            <div class="guide-step"><span class="step-num">2</span> Edit Details</div>
-            <div class="guide-step"><span class="step-num">3</span> See Live A4 Preview</div>
+            <h2>Resume Content Editor</h2>
+            <button class="btn btn-small btn-secondary" onclick="resetToDefault()" title="Reset to original verified resume data">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+              Load Verified Data
+            </button>
           </div>
         </div>
 
-        <!-- Section Navigation Tabs with Visual Icons -->
+        <!-- Section Navigation Tabs with Vector Icons -->
         <nav class="editor-tabs">
-          <button class="tab-btn active" onclick="switchTab('header-tab')">👤 Header</button>
-          <button class="tab-btn" onclick="switchTab('summary-tab')">📝 Summary</button>
-          <button class="tab-btn" onclick="switchTab('education-tab')">🎓 Education</button>
-          <button class="tab-btn" onclick="switchTab('skills-tab')">🛠️ Skills</button>
-          <button class="tab-btn" onclick="switchTab('projects-tab')">🚀 Projects</button>
-          <button class="tab-btn" onclick="switchTab('cert-tab')">🏆 Certs</button>
-          <button class="tab-btn" onclick="switchTab('leadership-tab')">👔 Leadership</button>
+          <button class="tab-btn active" onclick="switchTab('header-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Header
+          </button>
+          <button class="tab-btn" onclick="switchTab('summary-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            Summary
+          </button>
+          <button class="tab-btn" onclick="switchTab('education-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            Education
+          </button>
+          <button class="tab-btn" onclick="switchTab('skills-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            Skills
+          </button>
+          <button class="tab-btn" onclick="switchTab('projects-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            Projects
+          </button>
+          <button class="tab-btn" onclick="switchTab('cert-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            Certs
+          </button>
+          <button class="tab-btn" onclick="switchTab('leadership-tab')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Leadership
+          </button>
         </nav>
 
         <!-- Form Tab Content Panes -->
@@ -220,7 +247,9 @@
           <!-- TAB 1: Header & Personal Info -->
           <div id="header-tab" class="tab-pane active">
             <div class="section-banner">
-              <span class="banner-icon">👤</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
               <div>
                 <h3>Personal & Contact Info</h3>
                 <p>Enter your full name, headline positioning, and contact details.</p>
@@ -262,7 +291,9 @@
           <!-- TAB 2: Professional Summary -->
           <div id="summary-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">📝</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              </span>
               <div>
                 <h3>Professional Summary</h3>
                 <p>Write a concise 2–3 line summary highlighting your interdisciplinary skills.</p>
@@ -272,14 +303,16 @@
             <div class="form-group">
               <label>Summary Statement</label>
               <textarea id="input-summary" rows="6" placeholder="Interdisciplinary engineering student passionate about..." oninput="handleInputChange()"></textarea>
-              <span class="field-hint">💡 Tip: Keep it compact to fit easily on 1 A4 page.</span>
+              <span class="field-hint">Tip: Keep text compact to fit easily on 1 A4 page.</span>
             </div>
           </div>
 
           <!-- TAB 3: Education -->
           <div id="education-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">🎓</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              </span>
               <div>
                 <h3>Education & Qualifications</h3>
                 <p>Add your degrees, college name, graduation years, and CGPA details.</p>
@@ -293,7 +326,9 @@
           <!-- TAB 4: Technical Skills -->
           <div id="skills-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">🛠️</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </span>
               <div>
                 <h3>Technical Skills</h3>
                 <p>Categorize your programming languages, frameworks, databases & tools.</p>
@@ -337,7 +372,9 @@
           <!-- TAB 5: Projects -->
           <div id="projects-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">🚀</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              </span>
               <div>
                 <h3>Projects & Applications</h3>
                 <p>List your key technical projects, tech stacks, and bullet points.</p>
@@ -351,7 +388,9 @@
           <!-- TAB 6: Certification / Hackathons -->
           <div id="cert-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">🏆</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+              </span>
               <div>
                 <h3>Certifications & Hackathons</h3>
                 <p>Include hackathons, certificates, and relevant achievement activities.</p>
@@ -365,7 +404,9 @@
           <!-- TAB 7: Leadership -->
           <div id="leadership-tab" class="tab-pane">
             <div class="section-banner">
-              <span class="banner-icon">👔</span>
+              <span class="banner-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </span>
               <div>
                 <h3>Leadership & Roles</h3>
                 <p>Highlight positions of responsibility, Class Representative (CR), or team lead roles.</p>
