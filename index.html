@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ATS Resume Builder | Piyush Kumar</title>
+  <title>ATS Resume Studio | Piyush Kumar</title>
   <meta name="description" content="Single-page ATS-Friendly Resume Builder for Software & Product Development Internships">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,9 +12,10 @@
 </head>
 <body>
   <div id="app" class="app-container">
-    <!-- Top Web Application Header (Hidden in Print) -->
+    
+    <!-- Top Web Application Navigation Header (Hidden in Print) -->
     <header class="app-header no-print">
-      <div class="header-brand">
+      <div class="header-brand" onclick="showLanding()" style="cursor: pointer;" title="Back to Landing Page">
         <div class="logo-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -30,57 +31,170 @@
         </div>
       </div>
 
+      <!-- Navigation & Controls -->
       <div class="header-actions">
+        <!-- View Toggle Buttons -->
+        <button id="btn-landing-view" class="btn btn-secondary btn-small" onclick="showLanding()">
+          🏠 Home
+        </button>
+
+        <button id="btn-editor-view" class="btn btn-secondary btn-small" onclick="showEditor()">
+          ✏️ Editor
+        </button>
+
         <!-- Template Layout Selector -->
-        <div class="density-control" title="Choose template design layout">
+        <div class="density-control editor-only-control" title="Choose template design layout">
           <label for="template-select">Template:</label>
           <select id="template-select" onchange="updateTemplate(this.value)">
-            <option value="timeline" selected>Modern Timeline (As Requested)</option>
-            <option value="classic">Classic ATS (Single Column)</option>
+            <option value="timeline" selected>Modern Timeline</option>
+            <option value="classic">Classic ATS</option>
           </select>
         </div>
 
         <!-- Sidebar Background Selector -->
-        <div class="density-control" title="Sidebar background color style">
-          <label for="sidebar-select">Sidebar Tint:</label>
+        <div class="density-control editor-only-control" title="Sidebar background color style">
+          <label for="sidebar-select">Sidebar:</label>
           <select id="sidebar-select" onchange="updateSidebarBg(this.value)">
-            <option value="none" selected>Clean White (Safest ATS)</option>
-            <option value="soft">Soft Slate Tint</option>
-            <option value="dark">Dark Executive Navy</option>
+            <option value="none" selected>Clean White</option>
+            <option value="soft">Soft Slate</option>
+            <option value="dark">Dark Navy</option>
           </select>
         </div>
 
         <!-- Spacing Density Control -->
-        <div class="density-control" title="Adjust document spacing density to fit text on 1 A4 page">
+        <div class="density-control editor-only-control" title="Adjust document spacing density to fit text on 1 A4 page">
           <label for="spacing-select">Density:</label>
           <select id="spacing-select" onchange="updateSpacing(this.value)">
             <option value="normal">Standard</option>
-            <option value="compact" selected>Compact (1-Page)</option>
+            <option value="compact" selected>Compact</option>
             <option value="tight">Ultra Tight</option>
           </select>
         </div>
 
-        <button class="btn btn-secondary" onclick="resetToDefault()" title="Reset to original verified resume data">
+        <button class="btn btn-secondary editor-only-control" onclick="resetToDefault()" title="Reset to original verified resume data">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
             <path d="M3 3v5h5"></path>
           </svg>
-          Reset Default
+          Reset
         </button>
 
-        <button class="btn btn-primary" onclick="triggerPrint()" title="Export clean 1-Page PDF or print resume">
+        <button class="btn btn-primary" onclick="showEditor(); triggerPrint();" title="Export clean 1-Page PDF or print resume">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          Download PDF / Print
+          Download PDF
         </button>
       </div>
     </header>
 
-    <!-- Main Workspace Split Panel -->
-    <main class="workspace">
+    <!-- LANDING PAGE VIEW (Hero Showcase & Action Button) -->
+    <section id="landing-page" class="landing-page no-print">
+      <div class="landing-hero-container">
+        <!-- Floating Ambient Glow Orbs -->
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+
+        <div class="hero-grid">
+          <!-- Hero Copy Left -->
+          <div class="hero-copy">
+            <div class="hero-badge">
+              <span class="pulse-dot"></span> #1 ATS-Optimized Engineering Resume Builder
+            </div>
+            
+            <h1 class="hero-title">
+              Craft Production-Quality <br>
+              <span class="gradient-text">ATS Resumes</span> That Get You Hired.
+            </h1>
+
+            <p class="hero-subtitle">
+              Designed specifically for Mechatronics, Data Science & Full-Stack Engineering Internships. 
+              Strict 1-Page A4 Precision with instant PDF export & zero data usage.
+            </p>
+
+            <div class="hero-cta-group">
+              <button class="hero-btn-primary" onclick="showEditor()">
+                🚀 Launch Live Resume Editor
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+
+              <button class="hero-btn-secondary" onclick="showEditor(); triggerPrint();">
+                📄 Direct PDF Download
+              </button>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="hero-trust-bar">
+              <div class="trust-item">✓ 100% ATS Parser Compliant</div>
+              <div class="trust-item">✓ Clickable Hyperlinks Preserved</div>
+              <div class="trust-item">✓ Privacy Safe (Saved in Browser)</div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Right (Interactive Card Showcase) -->
+          <div class="hero-visual">
+            <div class="mockup-card-wrapper" onclick="showEditor()" title="Click to open Live Editor">
+              <div class="mockup-header-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="mockup-title">A4 Resume Preview - Piyush Kumar</span>
+              </div>
+              <div class="mockup-preview-snippet">
+                <div class="snippet-name">PIYUSH KUMAR</div>
+                <div class="snippet-sub">Full Stack Developer | Product Builder | Mechatronics & Data Science Student</div>
+                <div class="snippet-divider"></div>
+                <div class="snippet-section">PROJECTS & EXPERIENCE</div>
+                <div class="snippet-item">
+                  <strong>PCE Mechatronics – Class Management Dashboard</strong>
+                  <p>Built college class-management platform with personalized dashboards used by students & CR.</p>
+                </div>
+                <div class="snippet-item">
+                  <strong>Mr Candy – Online Grocery Delivery App</strong>
+                  <p>Building full-stack online ordering system with GPS tracking & PostgreSQL.</p>
+                </div>
+              </div>
+              <div class="click-overlay">
+                <span>✏️ Click to Edit Live Resume</span>
+              </div>
+            </div>
+
+            <!-- Floating Tech Stack Badges -->
+            <div class="floating-badge badge-react">React.js</div>
+            <div class="floating-badge badge-node">Node.js</div>
+            <div class="floating-badge badge-python">Python</div>
+            <div class="floating-badge badge-sql">PostgreSQL</div>
+          </div>
+        </div>
+
+        <!-- 3 Feature Glass Cards (Matching Reference Layout) -->
+        <div class="feature-cards-grid">
+          <div class="feature-card" onclick="showEditor()">
+            <div class="card-icon">🎯</div>
+            <h3>1-Page A4 Precision</h3>
+            <p>Smart height fit guard ensures your resume never overflows onto an accidental second page.</p>
+          </div>
+
+          <div class="feature-card" onclick="showEditor()">
+            <div class="card-icon">⚡</div>
+            <h3>Dual Layout Engine</h3>
+            <p>Switch seamlessly between Classic Single-Column ATS and Modern Executive Timeline layouts.</p>
+          </div>
+
+          <div class="feature-card" onclick="showEditor()">
+            <div class="card-icon">🔒</div>
+            <h3>Zero Data & Private</h3>
+            <p>Runs 100% locally in your browser with zero npm internet downloads. Auto-saved in localStorage.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MAIN EDITOR WORKSPACE PANEL -->
+    <main class="workspace" id="editor-workspace" style="display: none;">
       <!-- Left Controls Panel (Hidden in Print) -->
       <aside class="editor-panel no-print" id="editor-panel">
         <div class="editor-header">
@@ -233,6 +347,7 @@
         </div>
       </section>
     </main>
+
   </div>
 
   <script src="app.js"></script>

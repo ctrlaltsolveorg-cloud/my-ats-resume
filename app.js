@@ -139,12 +139,33 @@ function saveState() {
   }
 }
 
-// 3. INITIALIZATION
+// 3. INITIALIZATION & VIEW NAVIGATION
 document.addEventListener("DOMContentLoaded", () => {
   populateEditorFields();
   renderPreview();
-  checkPageFit();
+  showLanding(); // Default view is the Landing Showcase
 });
+
+function showLanding() {
+  const landing = document.getElementById("landing-page");
+  const editor = document.getElementById("editor-workspace");
+  if (landing) landing.style.display = "flex";
+  if (editor) editor.style.display = "none";
+
+  document.querySelectorAll(".editor-only-control").forEach(el => el.style.display = "none");
+}
+
+function showEditor() {
+  const landing = document.getElementById("landing-page");
+  const editor = document.getElementById("editor-workspace");
+  if (landing) landing.style.display = "none";
+  if (editor) editor.style.display = "flex";
+
+  document.querySelectorAll(".editor-only-control").forEach(el => el.style.display = "flex");
+
+  renderPreview();
+  checkPageFit();
+}
 
 function switchTab(tabId) {
   document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
