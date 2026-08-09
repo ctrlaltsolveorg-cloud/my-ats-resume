@@ -4,8 +4,9 @@
 
 // 1. DEFAULT VERIFIED RESUME DATA (Strict facts only, zero invented claims)
 const DEFAULT_RESUME_DATA = {
-  template: "timeline", // "timeline" (as requested in image) or "classic"
+  template: "timeline", // "timeline" or "classic"
   spacing: "compact",
+  sidebarBg: "none", // "none", "soft", "dark"
 
   fullName: "PIYUSH KUMAR",
   headline: "Full Stack Developer | Product Builder | Mechatronics & Data Science Student",
@@ -54,7 +55,7 @@ const DEFAULT_RESUME_DATA = {
       bullets: [
         "Built a college class-management platform for the Class Representative to manage attendance, student information, class routines, notices, holidays, and academic statistics.",
         "Developed personalized student profiles and dashboards with graphical and detailed views of individual academic data.",
-        "Built web and mobile interfaces using React.js, Node.js, and React Native, with the application actively used by the class."
+        "Built web and mobile interfaces using React.js, Node.js, and React Native, with application actively used by class."
       ]
     },
     {
@@ -63,7 +64,7 @@ const DEFAULT_RESUME_DATA = {
       subtitle: "Under Development",
       tech: "React.js, Tailwind CSS, Node.js, Supabase, PostgreSQL, GPS",
       bullets: [
-        "Building a full-stack online grocery delivery application focused on simplifying digital ordering for a local grocery business.",
+        "Building full-stack online grocery delivery application focused on simplifying digital ordering for local grocery business.",
         "Developing customer and operational workflows using React.js, Node.js, Supabase, and PostgreSQL.",
         "Integrating GPS tracking to support delivery-oriented functionality and order visibility."
       ]
@@ -74,9 +75,9 @@ const DEFAULT_RESUME_DATA = {
       subtitle: "macOS Desktop Utility",
       tech: "Electron.js, JavaScript, OpenCV",
       bullets: [
-        "Built a macOS desktop recording utility using Electron.js and OpenCV for simultaneous screen and webcam recording.",
-        "Added audio recording support to create a complete screen-recording workflow.",
-        "Built tool as practical alternative to subscription-based recording software for personal screen-recording work."
+        "Built macOS desktop recording utility using Electron.js and OpenCV for simultaneous screen and webcam recording.",
+        "Added audio recording support to create complete screen-recording workflow.",
+        "Built tool as practical alternative to subscription software for personal screen-recording work."
       ]
     },
     {
@@ -85,7 +86,7 @@ const DEFAULT_RESUME_DATA = {
       subtitle: "Academic Platform",
       tech: "React.js, Node.js",
       bullets: [
-        "Built a peer-learning platform for semester-mates to access C programming lectures, notes, and solutions in one place.",
+        "Built peer-learning platform for semester-mates to access C programming lectures, notes, and solutions in one place.",
         "Developed platform using React.js and Node.js with focus on simple access to course material.",
         "Deployed platform for student use and maintained it as a practical academic resource."
       ]
@@ -97,7 +98,7 @@ const DEFAULT_RESUME_DATA = {
       id: "cert-1",
       title: "Participant, FedEx Smart Hackathon",
       organization: "Shaastra 2026, IIT Madras / FedEx SMART Initiative",
-      bullet: "Worked on a debt-management problem focused on presenting data through an accessible dashboard and explored a data-pipeline-based approach for organizing information."
+      bullet: "Worked on debt-management problem focused on presenting data through accessible dashboard and explored data-pipeline-based approach for organizing information."
     }
   ],
 
@@ -120,7 +121,7 @@ let currentZoom = 1.0;
 
 function loadState() {
   try {
-    const saved = localStorage.getItem("ats_resume_data_v2");
+    const saved = localStorage.getItem("ats_resume_data_v3");
     if (saved) {
       return JSON.parse(saved);
     }
@@ -132,7 +133,7 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem("ats_resume_data_v2", JSON.stringify(state));
+    localStorage.setItem("ats_resume_data_v3", JSON.stringify(state));
   } catch (e) {
     console.error("Failed to save state", e);
   }
@@ -158,6 +159,7 @@ function switchTab(tabId) {
 function populateEditorFields() {
   setSelectValue("template-select", state.template || "timeline");
   setSelectValue("spacing-select", state.spacing || "compact");
+  setSelectValue("sidebar-select", state.sidebarBg || "none");
 
   setInputValue("input-fullName", state.fullName);
   setInputValue("input-headline", state.headline);
@@ -535,15 +537,16 @@ function removeLeadershipItem(lIdx) {
   checkPageFit();
 }
 
-// 6. DYNAMIC PREVIEW RENDERER (Supports Timeline & Classic layouts)
+// 6. DYNAMIC PREVIEW RENDERER
 function renderPreview() {
   const paper = document.getElementById("resume-paper");
   if (!paper) return;
 
   const t = state.template || "timeline";
   const s = state.spacing || "compact";
+  const bg = state.sidebarBg || "none";
 
-  paper.className = `resume-paper density-${s} template-${t}`;
+  paper.className = `resume-paper density-${s} template-${t} sidebar-${bg}`;
 
   if (t === "timeline") {
     renderTimelineTemplate(paper);
@@ -552,7 +555,7 @@ function renderPreview() {
   }
 }
 
-// TEMPLATE 2: MODERN EXECUTIVE TIMELINE (As seen in requested image)
+// TEMPLATE 2: MODERN EXECUTIVE TIMELINE
 function renderTimelineTemplate(paper) {
   const s = state.skills;
 
@@ -592,23 +595,20 @@ function renderTimelineTemplate(paper) {
   const leadHtml = state.leadership.map(l => `
     <div class="sidebar-skill-group">
       <h4>${escapeHtml(l.title)}</h4>
-      <p style="font-weight:600; color:#576574;">${escapeHtml(l.organization)}</p>
-      <ul style="padding-left:12px; font-size:7.8pt; margin-top:2px;">
+      <p style="font-weight:600;">${escapeHtml(l.organization)}</p>
+      <ul style="padding-left:12px; font-size:7.5pt; margin-top:2px;">
         ${l.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join("")}
       </ul>
     </div>
   `).join("");
 
   paper.innerHTML = `
-    <!-- Top Header -->
     <header class="timeline-header">
       <h1>${escapeHtml(state.fullName)}</h1>
       <div class="timeline-headline">${escapeHtml(state.headline)}</div>
     </header>
 
-    <!-- Two-Column Timeline Layout -->
     <div class="timeline-layout">
-      <!-- Left Sidebar (Contact, Skills, Leadership) -->
       <aside class="timeline-sidebar">
         <div class="sidebar-section">
           <h3 class="sidebar-section-title">CONTACT</h3>
@@ -640,10 +640,7 @@ function renderTimelineTemplate(paper) {
         ` : ''}
       </aside>
 
-      <!-- Right Main Column with Vertical Line & Section Nodes -->
       <main class="timeline-main">
-        
-        <!-- PROFILE -->
         ${state.summary ? `
           <div class="timeline-section">
             <div class="timeline-icon-badge" title="Profile Summary">
@@ -654,7 +651,6 @@ function renderTimelineTemplate(paper) {
           </div>
         ` : ''}
 
-        <!-- PROJECTS -->
         ${state.projects.length > 0 ? `
           <div class="timeline-section">
             <div class="timeline-icon-badge" title="Projects & Experience">
@@ -665,7 +661,6 @@ function renderTimelineTemplate(paper) {
           </div>
         ` : ''}
 
-        <!-- EDUCATION -->
         ${state.education.length > 0 ? `
           <div class="timeline-section">
             <div class="timeline-icon-badge" title="Education">
@@ -676,7 +671,6 @@ function renderTimelineTemplate(paper) {
           </div>
         ` : ''}
 
-        <!-- CERTIFICATION & HACKATHONS -->
         ${state.certifications.length > 0 ? `
           <div class="timeline-section">
             <div class="timeline-icon-badge" title="Certifications & Hackathons">
@@ -686,7 +680,6 @@ function renderTimelineTemplate(paper) {
             ${certHtml}
           </div>
         ` : ''}
-
       </main>
     </div>
   `;
@@ -817,6 +810,13 @@ function renderClassicTemplate(paper) {
 // 7. UTILITIES
 function updateTemplate(val) {
   state.template = val;
+  saveState();
+  renderPreview();
+  checkPageFit();
+}
+
+function updateSidebarBg(val) {
+  state.sidebarBg = val;
   saveState();
   renderPreview();
   checkPageFit();

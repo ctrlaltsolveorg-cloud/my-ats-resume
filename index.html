@@ -40,6 +40,16 @@
           </select>
         </div>
 
+        <!-- Sidebar Background Selector -->
+        <div class="density-control" title="Sidebar background color style">
+          <label for="sidebar-select">Sidebar Tint:</label>
+          <select id="sidebar-select" onchange="updateSidebarBg(this.value)">
+            <option value="none" selected>Clean White (Safest ATS)</option>
+            <option value="soft">Soft Slate Tint</option>
+            <option value="dark">Dark Executive Navy</option>
+          </select>
+        </div>
+
         <!-- Spacing Density Control -->
         <div class="density-control" title="Adjust document spacing density to fit text on 1 A4 page">
           <label for="spacing-select">Density:</label>
@@ -216,8 +226,8 @@
 
         <!-- Scrollable Canvas Wrapper -->
         <div class="preview-viewport" id="preview-viewport">
-          <!-- The Printable A4 Resume Document (Container populated dynamically by app.js) -->
-          <div id="resume-paper" class="resume-paper density-compact template-timeline">
+          <!-- The Printable A4 Resume Document -->
+          <div id="resume-paper" class="resume-paper density-compact template-timeline sidebar-none">
             <!-- Rendered content inserted by app.js -->
           </div>
         </div>

@@ -682,6 +682,47 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Sidebar Tint Options */
+.sidebar-soft .timeline-sidebar {
+  background-color: #f1f5f9; /* Soft Slate Tint */
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+.sidebar-dark .timeline-sidebar {
+  background-color: #1e293b; /* Executive Dark Navy */
+  color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.sidebar-dark .sidebar-section-title {
+  color: #60a5fa !important;
+  border-bottom-color: #3b82f6 !important;
+}
+
+.sidebar-dark .contact-list {
+  color: #e2e8f0 !important;
+}
+
+.sidebar-dark .contact-item svg {
+  color: #60a5fa !important;
+}
+
+.sidebar-dark .contact-item a {
+  color: #93c5fd !important;
+}
+
+.sidebar-dark .sidebar-skill-group h4 {
+  color: #60a5fa !important;
+}
+
+.sidebar-dark .sidebar-skill-group p {
+  color: #cbd5e1 !important;
 }
 
 .template-timeline .sidebar-section-title {
